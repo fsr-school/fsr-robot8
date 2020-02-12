@@ -1,15 +1,46 @@
 {
   "extends": ["taro"],
-  "rules": {
-    "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }]
-  },
-    "parser": "@typescript-eslint/parser",
+  "parser": "babel-eslint",
+  // "parser": "@typescript-eslint/parser",
+  "plugins": ["react-hooks"],
   "parserOptions": {
+    "ecmaVersion": 2017, // 启用ES8语法支持
+    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     },
     "useJSXTextNode": true,
     "project": "./tsconfig.json"
+  },
+  "rules": {
+    // 数组和对象键值对最后一个逗号， never 参数：不能带末尾的逗号, always 参数：必须带末尾的逗号，
+    // always-multiline：多行模式必须带逗号，单行模式不能带逗号
+    "comma-dangle": ["error", "always-multiline"],
+    // 强制在 JSX 属性中一致地使用双引号或单引号
+    "jsx-quotes": ["error", "prefer-double"],
+    // interface首字母不能为I
+    "react-hooks/rules-of-hooks": "error",
+    // 不能使用callback名称
+    "standard/no-callback-literal": "off",
+    // 如果只有一个export必须按使用export default
+    "import/prefer-default-export": "off",
+    // 禁止使用空结构模式
+    "no-empty-pattern": "off",
+    // 关闭react的缩进
+    "react/jsx-indent": "off",
+    // props必须按要定义类型
+    "react/prop-types": "error",
+    // jsx扩展后缀
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
+    "no-unused-vars": [
+      "error",
+      { "varsIgnorePattern": "^(Taro|state|events|loading|error)$" }
+    ],
+    "no-restricted-globals": "off",
+    "no-shadow": "off",
+    "react-hooks/exhaustive-deps": "off"
+  },
+  "globals": {
+    "wx": true
   }
-  }
+}
