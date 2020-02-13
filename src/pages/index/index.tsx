@@ -4,7 +4,7 @@ import { View, Text, Button } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import './index.scss'
 
-fsdafdsafsafsafdsafsad;
+毁掉
 
 export default class Index extends Component {
   state = {

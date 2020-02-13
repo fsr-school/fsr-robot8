@@ -8,7 +8,11 @@
     "typescript": true,
     "css": "sass"
   },
+  "pre-commit": [
+    "commit"
+  ],
   "scripts": {
+    "commit": "ts-node verify.ts",
     "build:weapp": "taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
