@@ -3,7 +3,8 @@
   "files.exclude": {},
   "editor.formatOnType": true, //编辑时是否自动格式化
   "editor.formatOnSave": true, //保存时是否自动格式化
-  // "editor.renderIndentGuides": false, //编写代码时是否给出对齐连线
-  // "editor.wordWrapColumn": 500, //视图每行最大字符数
-  // "editor.wordWrap": "wordWrapColumn", //视图自动换行控制(视觉上折行，不增加代码行数)，超出wordWrapColumn设置的值折行
+  "javascript.validate.enable": false, // 关闭编辑器的代码js检查
+  "typescript.validate.enable": false, // 关闭编辑器的代码ts检查
+  "typescript.tsdk": "node_modules/typescript/lib", // 手动配置SDK
+  "eslint.enable": true // 开启eslint代码检查
 }

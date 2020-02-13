@@ -1,10 +1,9 @@
-// eslint-disable-next-line no-unused-vars
+import 'taro-ui/dist/style/index.scss' // 全局引入一次即可
 import Taro, { Component, Config } from '@tarojs/taro'
 import Index from './pages/index'
 
-// eslint-disable-next-line import/first
-import 'taro-ui/dist/style/index.scss' // 全局引入一次即可
 import './app.scss'
+
 
 
 // 如果需要在 h5 环境中开启 React Devtools

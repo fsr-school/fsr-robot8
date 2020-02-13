@@ -1,10 +1,11 @@
-// eslint-disable-next-line no-unused-vars
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text, Button } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import './index.scss'
 
-毁掉
+
+
+// todo aaaa
 
 export default class Index extends Component {
   state = {
@@ -19,7 +20,6 @@ export default class Index extends Component {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
       })
-      return
     }
   }
 
