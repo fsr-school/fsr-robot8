@@ -4,14 +4,17 @@ import { View, Text, Button } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import './index.scss'
 
+fsdafdsafsafsafdsafsad;
+
 export default class Index extends Component {
   state = {
     openid: 'string'
   }
 
-  componentWillMount () { }
+  componentWillMount() { }
 
-  componentDidMount () {
+  componentDidMount() {
+    Taro.cloud.callFunction
     if (!Taro.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -20,13 +23,13 @@ export default class Index extends Component {
     }
   }
 
-  componentWillUnmount () { }
+  componentWillUnmount() { }
 
-  componentDidShow () { }
+  componentDidShow() { }
 
-  componentDidHide () { }
+  componentDidHide() { }
 
-  onGetOpenid () {
+  onGetOpenid() {
     console.log(9999)
 
     // 调用云函数
@@ -35,7 +38,7 @@ export default class Index extends Component {
       data: {},
       success: res => {
         console.log('[云函数] [login] user openid: ', res.result.openid)
-        this.setState({openid: res.result.openid})
+        this.setState({ openid: res.result.openid })
         wx.navigateTo({
           url: '../userConsole/userConsole',
         })
@@ -62,14 +65,14 @@ export default class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
-  render () {
+  render() {
     return (
       <View className='index'>
         <View className='at-article__h1'>
           <Text>{this.state.openid}</Text>
         </View>
-         <AtButton type='primary' onClick={this.onGetOpenid}>AtButton</AtButton>
-         <Button type='primary' onClick={this.onGetOpenid}>Button</Button>
+        <AtButton type='primary' onClick={this.onGetOpenid}>AtButton</AtButton>
+        <Button type='primary' onClick={this.onGetOpenid}>Button</Button>
       </View>
     )
   }

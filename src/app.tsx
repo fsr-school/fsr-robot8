@@ -20,7 +20,7 @@ class App extends Component {
     super(props)
   } */
 
-  componentDidMount () {
+  componentDidMount() {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -35,11 +35,11 @@ class App extends Component {
     }
   }
 
-  componentDidShow () {}
+  componentDidShow() { }
 
-  componentDidHide () {}
+  componentDidHide() { }
 
-  componentDidCatchError () {}
+  componentDidCatchError() { }
 
   /**
    * 指定config的类型声明为: Taro.Config
@@ -62,10 +62,10 @@ class App extends Component {
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
+  render() {
     return (
       <Index />
-    )
+    );
   }
 }
 
