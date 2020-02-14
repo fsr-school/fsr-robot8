@@ -4,9 +4,6 @@ import { AtButton } from 'taro-ui'
 import './index.scss'
 
 
-
-// todo aaaa
-
 export default class Index extends Component {
   state = {
     openid: 'string'
@@ -15,9 +12,8 @@ export default class Index extends Component {
   componentWillMount() { }
 
   componentDidMount() {
-    Taro.cloud.callFunction
-    if (!Taro.cloud) {
-      wx.redirectTo({
+    if (!wx.cloud) {
+      Taro.redirectTo({
         url: '../chooseLib/chooseLib',
       })
     }
@@ -77,3 +73,4 @@ export default class Index extends Component {
     )
   }
 }
+
