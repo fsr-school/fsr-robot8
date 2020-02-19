@@ -1,3 +1,5 @@
+const path = require('path')
+
 const config = {
   projectName: 'robot8',
   date: '2020-2-12',
@@ -19,7 +21,13 @@ const config = {
     plugins: [
       'transform-decorators-legacy',
       'transform-class-properties',
-      'transform-object-rest-spread'
+      'transform-object-rest-spread',
+      ['transform-runtime', {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true,
+        "moduleName": 'babel-runtime'
+      }]
     ]
   },
   plugins: [],
@@ -69,6 +77,9 @@ const config = {
         }
       }
     }
+  },
+  alias: {
+    '@': path.resolve(__dirname, '..', 'src')
   }
 }
 

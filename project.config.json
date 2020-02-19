@@ -1,12 +1,13 @@
 {
-  "miniprogramRoot": "dist/",
-  "cloudfunctionRoot": "cloudfunctions/",
+	"miniprogramRoot": "dist/",
+	"cloudfunctionRoot": "cloudfunctions/",
 	"projectname": "robot8",
 	"description": "恒星机器人",
 	"appid": "wx8c1f8623d93d0876",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
+		"enhance": true,
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
@@ -21,8 +22,7 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"enhance": true
+		}
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",

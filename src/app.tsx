@@ -1,8 +1,16 @@
-import 'taro-ui/dist/style/index.scss' // 全局引入一次即可
 import Taro, { Component, Config } from '@tarojs/taro'
-import Index from './pages/index'
+import { Provider } from '@tarojs/redux'
 
+import dva from './dva'
+import models from './models/index'
+
+import WeCloudApi from '@/services/wx-cloud-api'
+import WeApi from '@/services/wx-api'
+import Index from './pages/index'
 import './app.scss'
+
+WeApi.init()
+WeCloudApi.init()
 
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -11,27 +19,24 @@ import './app.scss'
 //   require('nerv-devtools')
 // }
 
+
+const dvaApp = dva.createApp({
+  initialState: {},
+  models
+})
+const store = dvaApp.getStore()
+
+
 class App extends Component {
 
   // 构造函数将会在装配之前被调用
   /* constructor (props) {
     super(props)
   } */
-
-  componentDidMount() {
-    if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-    } else {
-      wx.cloud.init({
-        // env 参数说明：
-        //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
-        //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
-        //   如不填则使用默认环境（第一个创建的环境）
-        // env: 'my-env-id',
-        traceUser: true,
-      })
-    }
+  componentWillMount() {
   }
+
+  componentDidMount() { }
 
   componentDidShow() { }
 
@@ -48,21 +53,52 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/timetable/index',
+      'pages/my/index',
+      'pages/webview/index',
     ],
     window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    }
+      backgroundTextStyle: 'dark',
+      navigationBarBackgroundColor: '#37B13F',
+      navigationBarTitleText: '恒星机器人',
+      navigationBarTextStyle: 'white'
+    },
+    tabBar: {
+      color: '#000',
+      selectedColor: '#37B13F',
+      backgroundColor: '#fff',
+      borderStyle: 'black',
+      list: [
+        {
+          text: '发现',
+          pagePath: 'pages/index/index',
+          iconPath: 'assets/images/icon-tabbar/discover.png', // #7A7E83
+          selectedIconPath: 'assets/images/icon-tabbar/discoverfill.png', // #37B13F
+        },
+        {
+          text: '课表',
+          pagePath: 'pages/timetable/index',
+          iconPath: 'assets/images/icon-tabbar/form.png',
+          selectedIconPath: 'assets/images/icon-tabbar/formfill.png',
+        },
+        {
+          text: '我的',
+          pagePath: 'pages/my/index',
+          iconPath: 'assets/images/icon-tabbar/my.png',
+          selectedIconPath: 'assets/images/icon-tabbar/myfill.png',
+        }
+      ]
+    },
   }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
     return (
-      <Index />
+      <Provider store={store}>
+        <Index />
+      </Provider>
     );
   }
 }
