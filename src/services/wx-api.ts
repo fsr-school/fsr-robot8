@@ -1,9 +1,10 @@
 import Taro from '@tarojs/taro'
-
+import { set as globalDataSet } from '@/utils/global-data'
 
 /**
  * 获取用户信息
  */
+/*
 function getUserInfo() {
   return new Promise((resolve, reject) => {
     wx.getSetting({
@@ -31,14 +32,23 @@ function getUserInfo() {
   })
 }
 
+init2() {
+  getUserInfo().then((res) => {
+    Taro.setStorageSync('userInfo', res)
+  }).catch((...res) => {
+    console.error(res);
+  })
+}
+*/
 
 export default {
   init() {
-    getUserInfo().then((ret) => {
-      Taro.setStorageSync('userInfo', ret)
-
-    }).catch((...ret) => {
-      console.error(ret);
+    Taro.getSetting().then(res => {
+      if (!res.authSetting['scope.userInfo']) return
+      // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+      Taro.getUserInfo().then(res => {
+        globalDataSet('userInfo', res.userInfo)
+      })
     })
   }
 }

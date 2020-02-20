@@ -59,7 +59,7 @@ export default class Index extends Component {
           <SwiperItem>
             <Image
               style='width: 100%;height: 200px;background: #fff;'
-              src={require('../../assets/images/swiper/2.jpg')} />
+              src='cloud://fsr-robot8.6673-fsr-robot8-1254200085/oMBkB0TWfwBlqUk-1P6lHi8J-wno/0.02490469532826589_1581241327904.jpg' />
           </SwiperItem>
           <SwiperItem>
             <Image

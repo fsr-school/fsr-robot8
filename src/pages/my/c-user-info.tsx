@@ -3,6 +3,7 @@ import Taro, { Component } from '@tarojs/taro'
 import dva, { connect } from 'dva';
 import { View, Text, Button } from '@tarojs/components'
 import { AtToast, AtList, AtListItem, AtAccordion, AtAvatar } from "taro-ui"
+import { get as globalDataGet, set as globalDataSet } from '@/utils/global-data'
 
 import './c-user-info.scss'
 
@@ -18,7 +19,7 @@ export default class Index extends Component {
   }
 
   componentWillMount() {
-    const userInfo = Taro.getStorageSync('userInfo')
+    const userInfo = globalDataGet('userInfo')
     if (userInfo) {
       this.setState({
         isLogin: true,
@@ -39,7 +40,7 @@ export default class Index extends Component {
   onGetUserInfo(ret) {
     const userInfo = ret.detail.userInfo
     if (userInfo) {
-      Taro.setStorageSync('userInfo', userInfo)
+      globalDataSet('userInfo', userInfo)
       this.setState({
         isLogin: true,
         avatarUrl: userInfo.avatarUrl,
@@ -57,19 +58,14 @@ export default class Index extends Component {
     const { isLogin, avatarUrl, nickName } = this.state
     return (
       <View className="c-user-info">
-        {
-          !isLogin && (
-            <Button openType="getUserInfo" onGetUserInfo={this.onGetUserInfo}>登录</Button>
-
-          )
-        }
-        {
-          isLogin && (
-            <View className="info">
-              <AtAvatar circle image={avatarUrl}></AtAvatar>
-              <Text className="username">{nickName}</Text>
-            </View>
-          )
+        {isLogin
+          ?
+          <View className="info">
+            <AtAvatar circle image={avatarUrl}></AtAvatar>
+            <Text className="username">{nickName}</Text>
+          </View>
+          :
+          <Button openType="getUserInfo" onGetUserInfo={this.onGetUserInfo}>登录</Button>
         }
         <AtAccordion className="children" title='正在管理学生：李晗亮'
           open={this.state.openChildren}

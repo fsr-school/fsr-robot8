@@ -78,6 +78,13 @@ const config = {
       }
     }
   },
+  copy: {
+    patterns: [
+      { from: 'sitemap.json', to: 'dist/' }, // 微信内爬虫搜索小程序用的配置文件
+      // { from: 'src/asset/tt/', to: 'dist/asset/tt/', ignore: '*.js' }, // 指定需要 copy 的目录
+      // { from: 'src/asset/tt/sd.jpg', to: 'dist/asset/tt/sd.jpg' } // 指定需要 copy 的文件
+    ]
+  },
   alias: {
     '@': path.resolve(__dirname, '..', 'src')
   }

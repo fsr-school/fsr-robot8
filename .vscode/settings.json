@@ -1,5 +1,13 @@
 {
-  "search.exclude": {},
+  "search.exclude": {
+    "**/.eslintrc.js": true,
+    "**/.gitignore": true,
+    "**/.npmignore": true,
+    "**/.npmrc": true,
+    "**/.editorconfig": true,
+    "**/package.json": true,
+    "**/package-lock.json": true
+  },
   "files.exclude": {},
   "editor.formatOnType": true, //编辑时是否自动格式化
   "editor.formatOnSave": true, //保存时是否自动格式化
