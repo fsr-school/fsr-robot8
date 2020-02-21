@@ -1,5 +1,12 @@
 {
   "permissions": {
     "openapi": []
-  }
+  },
+  "triggers": [
+    {
+      "name": "backdb_trigger",
+      "type": "timer",
+      "config": "0 0 4 * * 0 *"
+    }
+  ]
 }
