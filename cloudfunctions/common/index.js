@@ -54,7 +54,7 @@ async function getAccessToken() {
     data: {
       value: {
         access_token: access_token_new,
-        expires: new Date(Date.now() + (expires_new - 10) * 1000)
+        expires: new Date(Date.now() + (expires_new - 100) * 1000)
       }
     }
   })
@@ -80,7 +80,7 @@ async function getJobUrl(envId, data) {
     job_id = docRes.data[0].job_id
   }
   return new Promise((resolve, reject) => {
-    // 轮训任务状态
+    // 轮询任务状态
     const timer = setInterval(() => {
       request.post(
         `https://api.weixin.qq.com/tcb/databasemigratequeryinfo?access_token=${access_token}`,
