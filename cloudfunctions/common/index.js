@@ -3,7 +3,7 @@ const cloud = require('wx-server-sdk')
 const request = require('request')
 
 // 环境变量设置 或 当前调用环境一致
-const envId = (process.env && process.env.envId) || cloud.DYNAMIC_CURRENT_ENV
+const envId = (process.env && process.env.envId) || cloud.DYNAMIC_CURRENT_ENV || 'fsr-back-robot8'
 
 // 初始化 cloud
 cloud.init({

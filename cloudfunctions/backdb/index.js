@@ -2,15 +2,18 @@
 const request = require('request')
 const cloud = require('wx-server-sdk')
 
-// 环境变量设置 或 当前调用环境一致
-const envId = (process.env && process.env.envId) || cloud.DYNAMIC_CURRENT_ENV
+// 正式环境设为自动
+// const envId = cloud.DYNAMIC_CURRENT_ENV
+// 本地环境手动选择
+// const envId = 'fsr-robot8'
+const envId = 'fsr-back-robot8'
 
 cloud.init({
   env: envId
 })
 
 // 创建导出数据任务
-async function createExportJob(envId, accessToken, collection) {
+async function createExportJob(accessToken, collection) {
   const date = new Date().toISOString();
 
   return new Promise((resolve, reject) => {
@@ -19,7 +22,7 @@ async function createExportJob(envId, accessToken, collection) {
       {
         body: JSON.stringify({
           env: envId,
-          file_path: `${date}.json`,
+          file_path: `${collection}_${date}.json`,
           file_type: '1',
           query: `db.collection("${collection}").get()`
         })
@@ -38,44 +41,49 @@ async function createExportJob(envId, accessToken, collection) {
 
 exports.main = async (event, context) => {
   // 环境变量设置 或 当前调用环境一致
-  const envId = (process.env && process.env.envId) || cloud.DYNAMIC_CURRENT_ENV
   const log = cloud.logger()
   const db = cloud.database()
-  const collection = 'students' // event.collection;
+  let collections = (process.env && process.env.collection || '').concat(',backdb,config').split(/ *[, ，] */)
+    .filter((el, i, ary) => el && ary.lastIndexOf(el) == i)
 
-  try {
-    // 1. 获取 access_token
-    // const { access_token } = await getAccessToken(appid, secret);
-    const { result: access_token } = await cloud.callFunction({
-      name: 'common',
-      data: {
-        name: 'getAccessToken'
-      },
-    })
+  // 1. 获取 access_token
+  const access_token = event && event.access_token || await cloud.callFunction({
+    name: 'common',
+    data: {
+      name: 'getAccessToken'
+    },
+  });
 
-    // 2. 导出数据任务
-    const { job_id } = await createExportJob(envId, access_token, collection)
+  for (let i = 0; i < collections.length; i++) {
+    const collection = collections[i];
+    try {
 
-    // 将任务数据存入数据库
-    const res = await db.collection('backdb').add({
-      data: {
-        date: new Date(),
-        job_id: job_id
-      }
-    });
-    // 打印到日志中
-    log.info({
-      name: 'backdb',
-      collection,
-      job_id,
-    });
+      // 2. 导出数据任务
+      const { job_id } = await createExportJob(access_token, collection)
 
-  } catch (e) {
-    // 打印到日志中
-    log.error({
-      name: 'backdb',
-      ...e
-    });
+      // 将任务数据存入数据库
+      const res = await db.collection('backdb').add({
+        data: {
+          collection,
+          date: new Date(),
+          job_id: job_id
+        }
+      });
+      // 打印到日志中
+      log.info({
+        name: 'backdb',
+        collection,
+        job_id
+      });
+
+    } catch (e) {
+      // 打印到日志中
+      log.error({
+        name: 'backdb',
+        collection,
+        ...e
+      });
+    }
   }
 
 };

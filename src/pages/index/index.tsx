@@ -4,13 +4,14 @@ import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
 import { AtGrid, AtNavBar } from "taro-ui"
 import './index.scss'
 
+
 export default class Index extends Component {
   state = {
     openid: 'string'
   }
 
   componentWillMount() {
-  }
+  },
 
   componentDidMount() {
     // TAG 这里临时用于自动跳转 TabBar 页面
