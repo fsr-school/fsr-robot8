@@ -2,10 +2,12 @@
 const cloud = require('wx-server-sdk')
 const request = require('request')
 
-// 环境变量设置 或 当前调用环境一致
-const envId = (process.env && process.env.envId) || cloud.DYNAMIC_CURRENT_ENV || 'fsr-back-robot8'
+// 正式环境设为自动
+// const envId = cloud.DYNAMIC_CURRENT_ENV
+// 本地环境手动选择
+// const envId = 'fsr-robot8'
+const envId = 'fsr-back-robot8'
 
-// 初始化 cloud
 cloud.init({
   env: envId
 })
@@ -69,7 +71,7 @@ async function getAccessToken() {
  * @param {string} [data.access_token] 口令，如果不填则自动获取
  * @returns {string} 返回数据库备份文件路径
  */
-async function getJobUrl(envId, data) {
+async function getJobUrl(data) {
   let { access_token, job_id } = data || {}
   if (!access_token) {
     access_token = await getAccessToken()
@@ -117,14 +119,12 @@ const fns = {
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  // 环境变量设置 或 当前调用环境一致
-  const envId = (process.env && process.env.envId) || cloud.DYNAMIC_CURRENT_ENV
   const { name, data } = event
   const fn = fns[name]
   let res
 
   try {
-    res = await fn(envId, data)
+    res = await fn(data)
   } catch (e) {
     // 打印到日志中
     log.error({ name: 'common', ...e })

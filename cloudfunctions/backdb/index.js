@@ -13,12 +13,12 @@ cloud.init({
 })
 
 // 创建导出数据任务
-async function createExportJob(accessToken, collection) {
+async function createExportJob(access_token, collection) {
   const date = new Date().toISOString();
 
   return new Promise((resolve, reject) => {
     request.post(
-      `https://api.weixin.qq.com/tcb/databasemigrateexport?access_token=${accessToken}`,
+      `https://api.weixin.qq.com/tcb/databasemigrateexport?access_token=${access_token}`,
       {
         body: JSON.stringify({
           env: envId,
@@ -30,7 +30,7 @@ async function createExportJob(accessToken, collection) {
       (err, res, body) => {
         body = body ? JSON.parse(body) : {}
         if (err || !!body.errcode) {
-          reject({ log: '创建导出数据任务失败', err, body })
+          reject({ log: '创建导出数据任务失败', access_token, err, body })
           return
         }
         resolve(body)
@@ -47,12 +47,12 @@ exports.main = async (event, context) => {
     .filter((el, i, ary) => el && ary.lastIndexOf(el) == i)
 
   // 1. 获取 access_token
-  const access_token = event && event.access_token || await cloud.callFunction({
+  const access_token = event && event.access_token || (await cloud.callFunction({
     name: 'common',
     data: {
       name: 'getAccessToken'
     },
-  });
+  })).result
 
   for (let i = 0; i < collections.length; i++) {
     const collection = collections[i];

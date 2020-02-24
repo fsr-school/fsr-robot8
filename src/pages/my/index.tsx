@@ -1,15 +1,34 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import dva, { connect } from 'dva';
 import { View, Text, Button } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
 import CUserInfo from './c-user-info'
 import { AtList, AtListItem } from "taro-ui"
 
 import './index.scss'
 
+
+
+type PageDispatchProps = {
+  asyncLogin: () => void
+}
+
+
+@connect(({ my }) => ({
+  my
+}), (dispatch) => ({
+  asyncLogin() {
+    dispatch({
+      type: 'my/asyncLogin',
+    })
+  },
+}))
 export default class Index extends Component {
   state = {}
 
-  componentWillMount() { }
+  componentWillMount() {
+    this.props.asyncLogin()
+    this.props.asyncLogin()
+  }
 
   componentDidMount() { }
 
@@ -18,6 +37,10 @@ export default class Index extends Component {
   componentDidShow() { }
 
   componentDidHide() { }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props, nextProps)
+  }
 
   /**
    * 指定config的类型声明为: Taro.Config
@@ -31,8 +54,12 @@ export default class Index extends Component {
   }
 
   render() {
+    const { _id, auth } = this.props
+    console.log(3333, ...this.props);
+
     return (
       <View className='my'>
+        <Text>{_id} {auth} dsfsafdsafsaf</Text>
         <CUserInfo />
         <View>
           <AtList>
@@ -70,4 +97,5 @@ export default class Index extends Component {
     )
   }
 }
+
 

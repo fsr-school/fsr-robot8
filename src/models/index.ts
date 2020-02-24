@@ -1,9 +1,5 @@
-// import counter from './counter'
-// import my from './my'
-// import song from './song'
+import my from './my'
 
 export default [
-  // counter,
-  // my,
-  // song,
+  my,
 ]

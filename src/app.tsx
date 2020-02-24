@@ -4,13 +4,10 @@ import { Provider } from '@tarojs/redux'
 import dva from './dva'
 import models from './models/index'
 
-import WeCloudApi from '@/services/wx-cloud-api'
-import WeApi from '@/services/wx-api'
+import { init } from '@/services/index'
 import Index from './pages/index'
 import './app.scss'
 
-WeApi.init()
-WeCloudApi.init()
 
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -19,7 +16,10 @@ WeCloudApi.init()
 //   require('nerv-devtools')
 // }
 
+// 初始化数据接口
+init()
 
+// dva初始化
 const dvaApp = dva.createApp({
   initialState: {},
   models
@@ -29,19 +29,28 @@ const store = dvaApp.getStore()
 
 class App extends Component {
 
+  // 注意：Taro组件的 constructor 与 render 默认会多调用一次
+
   // 构造函数将会在装配之前被调用
   /* constructor (props) {
     super(props)
   } */
-  componentWillMount() {
-  }
 
+  // 组件将要挂载
+  componentWillMount() { }
+  // 组件已挂载
   componentDidMount() { }
-
+  // 组件已卸载
+  componentWillUnmount() { }
+  // 组件将要接收参数
+  componentWillReceiveProps(nextProps) {
+    // console.log(this.props, nextProps)
+  }
+  // 组件已显示
   componentDidShow() { }
-
+  // 组件已隐藏
   componentDidHide() { }
-
+  // 组件已捕获错误
   componentDidCatchError() { }
 
   /**
