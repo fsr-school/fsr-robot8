@@ -9,6 +9,10 @@ declare module "*.scss";
 declare module "*.sass";
 declare module "*.styl";
 
+// TAG 在这里定义声明全局外部变量
+declare const wx;
+
+
 // @ts-ignore
 declare const process: {
   env: {

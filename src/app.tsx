@@ -36,22 +36,20 @@ class App extends Component {
     super(props)
   } */
 
-  // 组件将要挂载
-  componentWillMount() { }
-  // 组件已挂载
-  componentDidMount() { }
-  // 组件已卸载
-  componentWillUnmount() { }
-  // 组件将要接收参数
-  componentWillReceiveProps(nextProps) {
-    // console.log(this.props, nextProps)
-  }
-  // 组件已显示
-  componentDidShow() { }
-  // 组件已隐藏
-  componentDidHide() { }
-  // 组件已捕获错误
-  componentDidCatchError() { }
+  // // 组件将要挂载
+  // componentWillMount() { }
+  // // 组件已挂载
+  // componentDidMount() { }
+  // // 组件已卸载
+  // componentWillUnmount() { }
+  // // 组件将要接收参数
+  // componentWillReceiveProps(nextProps) { }
+  // // 组件已显示
+  // componentDidShow() { }
+  // // 组件已隐藏
+  // componentDidHide() { }
+  // // 组件已捕获错误
+  // componentDidCatchError() { }
 
   /**
    * 指定config的类型声明为: Taro.Config

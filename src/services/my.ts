@@ -1,5 +1,4 @@
-import Taro from '@tarojs/taro'
-import { createCloudApi, createDbApi } from './cloud-api'
+import { createCloudApi } from './cloud-api'
 const { cloud } = wx;
 
 
@@ -14,14 +13,11 @@ export function login() {
       name: 'user',
       data: {
         name: 'login'
-      },
+      }
     }).then(res => {
-      console.log(777, ..res);
-
-      resolve(res.result)
-    }).catch(e => (){
-      console.log(666, ...e);
-      reject(...e)
+      resolve(res)
+    }).catch(err => {
+      reject(err)
     })
-  }, 'login')
+  }, 'my.login')
 }

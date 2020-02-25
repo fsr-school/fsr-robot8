@@ -53,8 +53,6 @@ exports.main = async (event, context) => {
         }
       })
     }
-
-    // console.log(JSON.stringify(res))
     return doc
   } catch (e) {
     // 打印到日志中

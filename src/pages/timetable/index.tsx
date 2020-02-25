@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import dva, { connect } from 'dva';
+import { View } from '@tarojs/components'
 import { AtCalendar } from 'taro-ui'
 import './index.scss'
 

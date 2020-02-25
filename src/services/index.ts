@@ -1,6 +1,8 @@
 import Taro from '@tarojs/taro'
+import logger from '@/utils/logger'
 import { IS_DEV } from '@/config/index'
 import { set as globalDataSet } from '@/utils/global-data'
+
 const { cloud } = wx;
 
 /**
@@ -9,10 +11,10 @@ const { cloud } = wx;
 function initWXCloud() {
 
   if (!cloud) {
-    console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+    logger.error('请使用 2.2.3 或以上的基础库以使用云能力')
     return;
   }
-  console.log('微信云开发初始化成功！');
+  logger.log('微信云开发初始化成功！');
 
   // 微信云开发初始化
   cloud.init({

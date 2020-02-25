@@ -1,35 +1,23 @@
-import Taro from '@tarojs/taro'
-import { IS_DEV } from '@/config/index'
-const { cloud } = wx;
+import { CLOUD_ERROR } from '@/config/index'
+import logger from '@/utils/logger'
 
-
-export function createDbApi(cb, apiId) {
-  return new Promise((resolve, reject) => {
-    return cb((...res) => {
-      console.log('db-api', apiId, JSON.parse(res))
-      resolve(...res)
-    }, reason => {
-      reject(reason)
-    })
-  }).catch(reason => {
-    // todo-leon 可以在这里做共用错误处理
-    const { errId } = reason;
-    console.error('db-api', apiId, ...reason)
-  })
-}
 
 export function createCloudApi(cb, apiId) {
   return new Promise((resolve, reject) => {
-    return cb((...res) => {
-      console.log('db-api', apiId, JSON.parse(res))
-      resolve(...res)
+    cb(res => {
+      logger.groupCollapsed(`>>> cloud-api:${apiId}`)
+      logger.log(res)
+      logger.groupEnd()
+      resolve(res.result)
     }, reason => {
       reject(reason)
     })
   }).catch(reason => {
-    // todo-leon 可以在这里做共用错误处理
-    const { errId } = reason;
-    console.error('cloud-api', apiId, ...reason)
+    const { errCode } = reason
+    const msg = CLOUD_ERROR[errCode]
+    logger.group(`>>> cloud-api:${apiId}，${errCode}:${msg}`)
+    logger.error(reason)
+    logger.groupEnd()
   })
 }
 

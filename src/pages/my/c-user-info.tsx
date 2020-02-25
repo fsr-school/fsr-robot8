@@ -1,21 +1,18 @@
 
 import Taro, { Component } from '@tarojs/taro'
-import dva, { connect } from 'dva';
 import { View, Text, Button } from '@tarojs/components'
-import { AtToast, AtList, AtListItem, AtAccordion, AtAvatar } from "taro-ui"
+import { AtList, AtListItem, AtAccordion, AtAvatar } from "taro-ui"
 import { get as globalDataGet, set as globalDataSet } from '@/utils/global-data'
 
 import './c-user-info.scss'
 
+
 export default class Index extends Component {
-  constructor() {
-    super(...arguments)
-    this.state = {
-      isLogin: false,
-      avatarUrl: '',
-      nickName: '',
-      openChildren: false,
-    }
+  state = {
+    isLogin: false,
+    avatarUrl: '',
+    nickName: '',
+    openChildren: false,
   }
 
   componentWillMount() {
@@ -28,14 +25,6 @@ export default class Index extends Component {
       })
     }
   }
-
-  componentDidMount() { }
-
-  componentWillUnmount() { }
-
-  componentDidShow() { }
-
-  componentDidHide() { }
 
   onGetUserInfo(ret) {
     const userInfo = ret.detail.userInfo
