@@ -31,3 +31,8 @@ export async function sleep(time = 1000) {
     time > 0 ? setTimeout(() => resolve(time), time) : resolve(time)
   });
 }
+
+
+export function sum(a: number, b: number) {
+  return a + b;
+}

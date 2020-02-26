@@ -11,9 +11,6 @@
   "files.exclude": {},
   "editor.formatOnType": true, //编辑时是否自动格式化
   "editor.formatOnSave": true, //保存时是否自动格式化
-  // "javascript.validate.enable": false, // 关闭编辑器的代码js检查
-  // "typescript.validate.enable": false, // 关闭编辑器的代码ts检查
-  "typescript.tsdk": "node_modules/typescript/lib", // 手动配置SDK
-  "eslint.enable": true,
-  "javascript.implicitProjectConfig.checkJs": true // 开启eslint代码检查
+  "javascript.validate.enable": true, // 编辑器的代码js检查
+  "typescript.validate.enable": true, // 编辑器的代码ts检查
 }
