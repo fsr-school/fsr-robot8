@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
-import logger from '@/utils/logger'
-import { IS_DEV } from '@/config/index'
-import { set as globalDataSet } from '@/utils/global-data'
+import logger from '../utils/logger'
+import { IS_DEV } from '../config/index'
+import { set as globalDataSet } from '../utils/global-data'
 
 const { cloud } = wx;
 

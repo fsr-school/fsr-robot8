@@ -32,7 +32,3 @@ export async function sleep(time = 1000) {
   });
 }
 
-
-export function sum(a: number, b: number) {
-  return a + b;
-}

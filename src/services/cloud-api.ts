@@ -1,5 +1,5 @@
-import { CLOUD_ERROR } from '@/config/index'
-import logger from '@/utils/logger'
+import { CLOUD_ERROR } from '../config/index'
+import logger from '../utils/logger'
 
 
 export function createCloudApi(cb, apiId) {

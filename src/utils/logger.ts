@@ -1,4 +1,4 @@
-import { IS_DEV } from '@/config/index'
+import { IS_DEV } from '../config/index'
 
 
 let enabled = IS_DEV;
