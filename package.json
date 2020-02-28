@@ -12,6 +12,7 @@
     "commit"
   ],
   "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "tep": "node scripts/template",
     "commit": "ts-node verify.ts",
     "build:weapp": "taro build --type weapp",
@@ -92,10 +93,5 @@
     "ts-jest": "^25.2.1",
     "typescript": "^3.0.1",
     "webpack-bundle-analyzer": "^3.6.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
