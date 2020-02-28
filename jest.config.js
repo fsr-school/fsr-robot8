@@ -155,7 +155,7 @@ module.exports = {
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],
   testRegex: [
-    "/test/?(*.)+(spec|test).[tj]s?(x)"
+    "/tests/?(*.)+(spec|test).[tj]s?(x)"
   ],
 
   // This option allows the use of a custom results processor
