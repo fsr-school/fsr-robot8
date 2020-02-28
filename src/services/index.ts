@@ -4,7 +4,6 @@ import { IS_DEV } from '../config/index'
 import { set as globalDataSet } from '../utils/global-data'
 
 const { cloud } = wx;
-
 /**
  * 微信云开发初始化
  */

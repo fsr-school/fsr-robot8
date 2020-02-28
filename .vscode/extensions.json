@@ -1,0 +1,41 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+  // List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    // 汉化：Chinese (Simplified) Language Pack for Visual Studio Code
+    "ms-ceintl.vscode-language-pack-zh-hans",
+    // C/C++
+    "ms-vscode.cpptools",
+    // Python
+    "ms-python.python",
+    // 运行：Code Runner
+    "formulahendry.code-runner",
+    // 编辑器参数配置：EditorConfig for VS Code
+    "editorconfig.editorconfig",
+    // markdown工具：Markdown All in One
+    "yzhang.markdown-all-in-one",
+    // git界面操作：Git Graph
+    "mhutchie.git-graph",
+    // 待办事项：Todo Tree
+    "gruntfuggly.todo-tree",
+    // JsDoc：codedox
+    "wiggin77.codedox",
+    // 颜色值高亮：Color Highlight
+    "naumovs.color-highlight",
+    // 谷歌浏览器调试：Debugger for Chrome
+    "msjsdiag.debugger-for-chrome",
+    // HTML简单预览：HTML Preview
+    "tht13.html-preview-vscode",
+    // 自动测试，显示结果到问题面板：Jest
+    "orta.vscode-jest",
+    // 划词翻译：TranslationToolbox
+    "wly.translationtoolbox",
+    // 变量名翻译：var-translate
+    "svenzhao.var-translation",
+    // Commitizen格式git日志：Visual Studio Code Commitizen Support
+    "knisterpeter.vscode-commitizen",
+  ],
+  // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+  "unwantedRecommendations": [],
+}
