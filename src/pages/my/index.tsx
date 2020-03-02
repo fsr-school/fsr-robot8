@@ -48,36 +48,18 @@ interface Index {
   },
 }))
 class Index extends Component<IProps, PageState> {
-  state = {}
 
   componentWillMount() {
     this.props.asyncLogin()
   }
 
-  // componentDidMount() { }
-
-  // componentWillUnmount() { }
-
-  // componentDidShow() { }
-
-  // componentDidHide() { }
-
-  // componentWillReceiveProps(nextProps) { }
-
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
   config: Config = {
     navigationBarTitleText: '恒星 - 我的'
   }
 
   render() {
     const { auth } = this.props.my
-
+    const { id } = this.$router.params
     return (
       <View className='my'>
         <CUserInfo />
@@ -91,7 +73,7 @@ class Index extends Component<IProps, PageState> {
               iconInfo={{
                 size: 25, color: '#78A4FA', value: 'image',
               }} />
-            <AtListItem title='留言' extraText='+3' arrow='right'
+            <AtListItem title={'留言' + id} extraText='+3' arrow='right'
               iconInfo={{
                 size: 25, color: '#ee9900', value: 'message',
               }} />
