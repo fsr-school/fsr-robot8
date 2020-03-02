@@ -1,5 +1,6 @@
 ><h1>恒星小程序 - 数据库</h1>
 
+- [功能](#%e5%8a%9f%e8%83%bd)
 - [数据逻辑](#%e6%95%b0%e6%8d%ae%e9%80%bb%e8%be%91)
   - [学生档案](#%e5%ad%a6%e7%94%9f%e6%a1%a3%e6%a1%88)
   - [班级信息](#%e7%8f%ad%e7%ba%a7%e4%bf%a1%e6%81%af)
@@ -10,6 +11,13 @@
 - [数据表](#%e6%95%b0%e6%8d%ae%e8%a1%a8)
   - [`config` 系统配置](#config-%e7%b3%bb%e7%bb%9f%e9%85%8d%e7%bd%ae)
 
+# 功能
+
+- [x] 定时备份数据表
+- [ ] 定时打包下载
+- [ ] 继续测试 `job_id` 能保存多长时间，目前已测试 `12` 天正常
+- [ ] 使用时间执行差异化备份
+- [ ] 可以制定差异备份每周一次，完整备份每月一次
 
 # 数据逻辑
 
@@ -93,8 +101,8 @@
     "_id": "auth",
     "value": {
       "roles": {
-        "admin":[],
-        "teacher":[],
+        "admin":["admin.student"],
+        "teacher":["teacher.student"],
       },
       "users": {
         // openid
@@ -112,6 +120,7 @@
 客户端静态配置表
 ```js
 const functionIds = {
-  "1000": "功能描述"
+  "admin.student": "管理所有学生",
+  "teacher.student": "管理班级学生",
 }
 ```

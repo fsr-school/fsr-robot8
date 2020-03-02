@@ -5,16 +5,18 @@ async function auth() {
   const _ = db.command
   const { OPENID } = cloud.getWXContext()
   let res = await db.collection('config').doc('auth').get()
-  const data = res[0].value
-  const myRoles = data.users[OPENID] || []
-  // 没有角色配置，或被禁用，就直接返回空数组
-  if (myRoles.length == 0 || data.disable.user[OPENID]) return []
+  const data = res.data.value
+  const myRoles = data.users[OPENID]
+
   let roles = []
+  // 没有角色配置，或被禁用，就直接返回空数组
+  if (!myRoles || myRoles.length == 0 || data.disable.users[OPENID]) return roles
+  // 过滤掉被禁用的角色，再组合有效权限返回
   myRoles.filter((value, index, array) => {
     return data.disable.roles.indexOf(value) == -1
   }).forEach(el => {
-    const role = data[el] || []
-    roles.push(...role)
+    const role = data.roles[el]
+    role && roles.push(...role)
   })
   return roles
 }
@@ -56,6 +58,8 @@ async function login() {
       }
     })
   }
+  // 增加权限配置
+  doc.auth = await auth()
   return doc
 }
 
