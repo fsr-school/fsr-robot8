@@ -4,9 +4,9 @@
   },
   "triggers": [
     {
-      "name": "backdb_trigger",
+      "name": "backdb",
       "type": "timer",
-      "config": "0 0 4 * * 0 *"
+      "config": "0 0 4 * * MON *"
     }
   ]
 }
