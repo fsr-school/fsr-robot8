@@ -7,7 +7,8 @@
     - [`getJobUrl` 获取数据库备份文件地址](#getjoburl-%e8%8e%b7%e5%8f%96%e6%95%b0%e6%8d%ae%e5%ba%93%e5%a4%87%e4%bb%bd%e6%96%87%e4%bb%b6%e5%9c%b0%e5%9d%80)
   - [`common` 公用](#common-%e5%85%ac%e7%94%a8)
     - [`login` 登录 [自动注册]](#login-%e7%99%bb%e5%bd%95-%e8%87%aa%e5%8a%a8%e6%b3%a8%e5%86%8c)
-    - [`auth` 获取授权功能](#auth-%e8%8e%b7%e5%8f%96%e6%8e%88%e6%9d%83%e5%8a%9f%e8%83%bd)
+    - [`auth` 获取用户授权列表](#auth-%e8%8e%b7%e5%8f%96%e7%94%a8%e6%88%b7%e6%8e%88%e6%9d%83%e5%88%97%e8%a1%a8)
+    - [? `setUserInfo` 更新用户昵称](#setuserinfo-%e6%9b%b4%e6%96%b0%e7%94%a8%e6%88%b7%e6%98%b5%e7%a7%b0)
 
 # 云函数
 
@@ -91,8 +92,7 @@
 }
 ```
 
-
-### `auth` 获取授权功能
+### `auth` 获取用户授权列表
 
 查询权限配置表，返回用户被授权的所有功能编号。
 
@@ -109,3 +109,20 @@
   result:["功能id"]
 }
 ```
+
+### ? `setUserInfo` 更新用户昵称
+
+使用微信用户数据[头像、昵称]，更新时自动提交保存。
+
+请求参数：
+```json
+{
+  name: "setUserInfo",
+  data:{
+    avatar: "xxx",
+    nickname: "xxx",
+  }
+}
+```
+
+返回数据：无
