@@ -1,6 +1,6 @@
 const request = require('request')
 const cloud = require('wx-server-sdk')
-const { getAccessToken } = require('./access-token')
+const { getAccessToken } = require('./token')
 
 // /**
 //  * 调用共用云函数中获取口令

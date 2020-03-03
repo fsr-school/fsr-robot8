@@ -1,5 +1,7 @@
 const cloud = require('wx-server-sdk')
-
+/**
+ * 获取用户授权数组
+ */
 async function auth() {
   const db = cloud.database()
   const _ = db.command
@@ -21,6 +23,9 @@ async function auth() {
   return roles
 }
 
+/**
+ * 登录，自动注册
+ */
 async function login() {
   const db = cloud.database()
   const _ = db.command
@@ -38,17 +43,16 @@ async function login() {
   // 如果没有用户数据
   if (res.data.length == 0) {
     // 注册
-    res = await db.collection('users').add({
-      data: {
-        _openid: OPENID,
-        create_time: date,
-        update_time: date
-      }
-    })
+    doc = {
+      _openid: OPENID,
+      create_time: date,
+      update_time: date
+    }
+    res = await db.collection('users').add({ data: doc })
     // 更新时间
-    doc = res.data[0]
     delete doc.create_time
     delete doc.update_time
+    doc._id = res._id
   } else {
     // 更新时间
     doc = res.data[0]
@@ -63,8 +67,24 @@ async function login() {
   return doc
 }
 
+/**
+ * 设置用户基本数据
+ */
+async function setUserInfo({ uid, nickName, avatarUrl }) {
+  const db = cloud.database()
+
+  await db.collection('users').doc(uid).update({
+    data: {
+      nickName,
+      avatarUrl,
+    }
+  })
+}
+
+
 
 module.exports = {
   login,
   auth,
+  setUserInfo,
 }
