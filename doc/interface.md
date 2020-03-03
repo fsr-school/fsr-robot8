@@ -119,8 +119,9 @@
 {
   name: "setUserInfo",
   data:{
-    avatar: "xxx",
+    uid: "xxx",
     nickname: "xxx",
+    avatarUrl: "xxx",
   }
 }
 ```

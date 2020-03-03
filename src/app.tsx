@@ -40,16 +40,18 @@ class App extends Component {
   // componentWillMount() { }
   // // 组件已挂载
   // componentDidMount() { }
-  // // 组件已卸载
-  // componentWillUnmount() { }
-  // // 组件将要接收参数
-  // componentWillReceiveProps(nextProps) { }
   // // 组件已显示
   // componentDidShow() { }
+  // // 组件将要接收参数
+  // componentWillReceiveProps(nextProps) { }
   // // 组件已隐藏
   // componentDidHide() { }
   // // 组件已捕获错误
   // componentDidCatchError() { }
+  // // 组件已完成更新显示
+  // componentDidUpdate() { }
+  // // 组件已卸载
+  // componentWillUnmount() { }
 
   /**
    * 指定config的类型声明为: Taro.Config
@@ -104,6 +106,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        // @ts-ignore // TAG 这里的类型错误不清楚
         <Index />
       </Provider>
     );

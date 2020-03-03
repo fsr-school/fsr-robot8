@@ -1,5 +1,5 @@
 const cloud = require('wx-server-sdk')
-const isDev = require('./develop')
+const isDev = require('./dev')
 const envId = isDev ? 'fsr-back-robot8' : cloud.DYNAMIC_CURRENT_ENV
 cloud.init({ env: envId })
 

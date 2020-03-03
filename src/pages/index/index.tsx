@@ -1,10 +1,33 @@
 import Taro, { Component, Config } from '@tarojs/taro'
+import { connect } from '@tarojs/redux'
+
 import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
-import { AtGrid, AtNavBar } from "taro-ui"
+import { AtGrid } from "taro-ui"
 import './index.scss'
 
 
-export default class Index extends Component {
+@connect(({ my }) => ({
+  my
+}), (dispatch) => ({
+  eLogin() {
+    dispatch({
+      type: 'my/eLogin',
+    })
+  },
+  eGetUserInfo() {
+    dispatch({
+      type: 'my/eGetUserInfo',
+    })
+  },
+  eSetUserInfo(payload) {
+    dispatch({
+      type: 'my/eSetUserInfo',
+      payload
+    })
+  },
+}))
+export default class Index extends Component<MyIProps, MyPageState> {
+
   onShareAppMessage(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -15,7 +38,13 @@ export default class Index extends Component {
       path: '/pages/my/index?id=123'
     }
   }
-
+  // 组件将要挂载
+  componentWillMount() {
+    // 登录和获取用户信息，有更新就保存到数据库，仅执行一次
+    this.props.eLogin()
+    this.props.eGetUserInfo()
+  }
+  // 组件已显示
   componentDidMount() {
     Taro.getClipboardData({
       success: function (res) {
@@ -35,6 +64,7 @@ export default class Index extends Component {
   }
 
   render() {
+    console.log(3333, this.props.my);
     return (
       <View className='index'>
         <Swiper
@@ -91,23 +121,6 @@ export default class Index extends Component {
             }
           ]
         } />
-        <View className='doc-header'>
-          <View className='doc-header__title'>title</View>
-          <View className='doc-header__desc'>desc</View>
-        </View>
-        <View className='panel'>
-          <View className='panel__title'>NavBar 导航栏</View>
-          <View className='panel__content no-padding'>
-            <View className='example-item'>
-              <AtNavBar
-                title='NavBar 导航栏示例'
-                leftIconType='chevron-left'
-                rightFirstIconType='bullet-list'
-                rightSecondIconType='user'
-              />
-            </View>
-          </View>
-        </View>
       </View>
     )
   }
