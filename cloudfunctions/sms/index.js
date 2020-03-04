@@ -4,7 +4,7 @@ const envId = isDev ? 'fsr-back-robot8' : cloud.DYNAMIC_CURRENT_ENV
 cloud.init({ env: envId })
 
 const fns = {
-  job: require('./src/job'),
+  sms: require('./src/sms'),
 }
 
 // 接口函数书写规则：

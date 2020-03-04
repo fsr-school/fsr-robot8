@@ -2,10 +2,9 @@ const cloud = require('wx-server-sdk')
 /**
  * 获取用户授权数组
  */
-async function auth() {
+async function auth({ OPENID }) {
   const db = cloud.database()
   const _ = db.command
-  const { OPENID } = cloud.getWXContext()
   let res = await db.collection('config').doc('auth').get()
   const data = res.data.value
   const myRoles = data.users[OPENID]
@@ -26,10 +25,10 @@ async function auth() {
 /**
  * 登录，自动注册
  */
-async function login() {
+async function login({ OPENID }) {
+  const logger = cloud.logger()
   const db = cloud.database()
   const _ = db.command
-  const { OPENID } = cloud.getWXContext()
   let date = new Date()
 
   // 查询用户数据
@@ -40,6 +39,7 @@ async function login() {
     _openid: OPENID
   }).get()
 
+  let doc
   // 如果没有用户数据
   if (res.data.length == 0) {
     // 注册
@@ -63,17 +63,19 @@ async function login() {
     })
   }
   // 增加权限配置
-  doc.auth = await auth()
+  doc.auth = await auth({ OPENID })
   return doc
 }
 
 /**
  * 设置用户基本数据
  */
-async function setUserInfo({ uid, nickName, avatarUrl }) {
+async function setUserInfo({ OPENID, nickName, avatarUrl }) {
   const db = cloud.database()
 
-  await db.collection('users').doc(uid).update({
+  await db.collection('users').where({
+    _openid: OPENID
+  }).update({
     data: {
       nickName,
       avatarUrl,
@@ -82,9 +84,38 @@ async function setUserInfo({ uid, nickName, avatarUrl }) {
 }
 
 
+/**
+ * 设置用户手机号
+ */
+async function setPhone({ OPENID, phone, PIN }) {
+  // 查询
+  const db = cloud.database()
+  const _ = db.command
+  const { data } = await db.collection('sms').where({
+    _openid: OPENID,
+    phone,
+    PIN,
+    expire_time: _.gte(new Date())
+  }).get()
+  // 设置手机号失败，验证码错误或失效
+  if (data.length == 0) throw { status: '2101', err: { phone, PIN } }
+  // 更新用户手机号
+  await db.collection('users').where({
+    _openid: OPENID
+  }).update({
+    data: {
+      phone,
+    }
+  })
+  // 删除所有此手机短信记录
+  await db.collection('sms').where({ phone }).remove()
+
+}
+
 
 module.exports = {
   login,
   auth,
   setUserInfo,
+  setPhone,
 }
