@@ -1,4 +1,4 @@
-import { CLOUD_ERROR } from '../config/index'
+import { APP_ERROR, CLOUD_ERROR } from '../config/index'
 import logger from '../utils/logger'
 
 
@@ -13,8 +13,9 @@ export function createCloudApi(cb, apiId) {
       reject(reason)
     })
   }).catch(reason => {
-    const { errCode } = reason
-    const msg = CLOUD_ERROR[errCode]
+    // 请求错误、网络错误、调用错误、语法错误等
+    const { errCode, status } = reason
+    const msg = APP_ERROR[status] || CLOUD_ERROR[errCode]
     logger.group(`>>> cloud-api:${apiId}，${errCode}:${msg}`)
     logger.error(reason)
     logger.groupEnd()

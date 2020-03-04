@@ -1,7 +1,7 @@
 import { IS_DEV } from '../config/index'
 
 
-let enabled = true;// IS_DEV;
+let enabled = IS_DEV;
 
 export function setEnabledLogger(isEnabled = true): void {
   enabled = isEnabled

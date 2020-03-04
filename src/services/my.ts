@@ -15,10 +15,12 @@ export function login() {
     cloud.callFunction({
       name: 'common',
       data: {
+        space: 'user',
         name: 'login'
       }
     }).then(res => {
-      resolve(res)
+      const {/* status,  */data } = res
+      resolve(data)
     }).catch(err => {
       reject(err)
     })
@@ -60,13 +62,41 @@ export function setUserInfo({ uid, nickName, avatarUrl }) {
     cloud.callFunction({
       name: 'common',
       data: {
+        space: 'user',
         name: 'setUserInfo',
         data: { uid, nickName, avatarUrl }
       }
     }).then(res => {
-      resolve(res)
+      const {/* status,  */data } = res
+      resolve(data)
     }).catch(err => {
       reject(err)
     })
-  }, 'my.login')
+  }, 'my.setUserInfo')
+}
+
+
+/**
+ * 发送手机验证码
+ */
+export function getSms({ phone }) {
+  return createCloudApi((resolve, reject) => {
+    cloud.callFunction({
+      name: 'sms',
+      data: {
+        space: 'sms',
+        name: 'sendPIN',
+        data: { phone }
+      }
+    }).then(res => {
+      const { status, data } = res
+      if (status != '0') {
+        // todo-leon 错误处理，提示用户
+        reject(res)
+      }
+      resolve(data)
+    }).catch(err => {
+      reject(err)
+    })
+  }, 'my.getSms')
 }

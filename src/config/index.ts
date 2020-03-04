@@ -7,6 +7,17 @@ export const IS_DEV = process.env.NODE_ENV === 'development'
  * 服务端链接前缀
  */
 export const BASE_URL = IS_DEV ? 'http://localhost:3000' : 'http://localhost:3000'
+
+/**
+ * 应用逻辑错误信息
+ */
+export const APP_ERROR = {
+  '1101': '手机号格式错误。',
+  '1102': '手机验证码发送失败。',
+
+  '2101': '设置手机号失败，验证码错误或失效。',
+}
+
 /**
  * 服务端接口错误信息
  */

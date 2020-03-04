@@ -8,7 +8,6 @@ export default {
   effects: {
     *eLogin(_, { call, put }) {
       const res = yield call(login)
-      console.log(666, JSON.stringify(res));
       if (!scopeUserInfo) {
         // 使用临时变量先保存权限数组，等用户授权信息获取了再赋值
         tempAuth = res.auth
@@ -44,8 +43,6 @@ export default {
       }
       scopeUserInfo = true
       // 当授权获取用户信息后再赋值
-      console.log(state, res, 77777);
-
       if (!state.auth || state.auth.length == 0) res.auth = tempAuth
       return res
     },
