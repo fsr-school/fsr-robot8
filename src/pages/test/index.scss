@@ -1,0 +1,33 @@
+
+@import '../../assets/style/theme.scss';
+
+.my{
+
+  .my-user-info{
+    overflow: hidden;
+    padding: $spacing-v-xl $spacing-v-xl 0 $spacing-v-xl;
+    background-color: $color-brand;
+    border-bottom: $border-radius-md $color-brand-light solid;
+    text-align: center;
+
+    .my-avatar{
+      margin: $spacing-v-xl auto;
+      border: $border-radius-sm rgba($color-brand, 0.5) solid;
+    }
+    .my-nickname{
+      font-size: $font-size-lg;
+      color: $color-text-base-inverse;
+      .at-icon{
+        color: $color-text-secondary2;
+      }
+    }
+  }
+
+  .my-user-score{
+    border: 1px blue solid;
+  }
+
+  .my-menu-bar{
+    margin-top: $spacing-v-lg;
+  }
+}

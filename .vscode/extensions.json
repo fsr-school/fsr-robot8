@@ -35,6 +35,10 @@
     "svenzhao.var-translation",
     // Commitizen格式git日志：Visual Studio Code Commitizen Support
     "knisterpeter.vscode-commitizen",
+    // 资源图标插件 vscode-icons
+    "vscode-icons-team.vscode-icons",
+    // scss智能提示：SCSS IntelliSense
+    "mrmlnc.vscode-scss",
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": [],

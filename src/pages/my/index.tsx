@@ -4,6 +4,8 @@ import { connect } from '@tarojs/redux'
 import { View, Text, Button } from '@tarojs/components'
 import { AtList, AtListItem, AtAccordion, AtAvatar } from "taro-ui"
 
+import { StudentBar, FsrGrid } from "@/components/index";
+
 import './index.scss'
 
 
@@ -16,6 +18,33 @@ import './index.scss'
 // ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
 //
 // #endregion
+
+type PageStateProps = {
+  my: {
+    _id: string,
+    auth: Array<string>,
+    nickName: string,
+    avatarUrl: string,
+    // 是否授权获取用户信息
+    scopeUserInfo: boolean,
+  }
+}
+
+type PageDispatchProps = {
+  eLogin: () => void
+  eGetUserInfo: () => void
+  eSetUserInfo: (payload) => void
+}
+
+type PageOwnProps = {}
+
+type PageState = {}
+
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+
+interface Index {
+  props: IProps;
+}
 
 @connect(({ my }) => ({
   my
@@ -37,7 +66,7 @@ import './index.scss'
     })
   },
 }))
-export default class Index extends Component<MyIProps, MyPageState> {
+class Index extends Component<IProps, PageState> {
   state = {
     openChildren: false,
   }
@@ -68,7 +97,7 @@ export default class Index extends Component<MyIProps, MyPageState> {
 
     return (
       <View className='my'>
-        <View className="c-user-info">
+        <View className="-user-info">
           {scopeUserInfo
             ?
             <View className="info">
@@ -78,6 +107,7 @@ export default class Index extends Component<MyIProps, MyPageState> {
             :
             <Button openType="getUserInfo" onGetUserInfo={this.onGetUserInfo}>登录</Button>
           }
+          <StudentBar />
           <AtAccordion className="children" title='正在管理学生：李晗亮'
             open={this.state.openChildren}
             onClick={this.handleClick.bind(this)}
@@ -96,6 +126,27 @@ export default class Index extends Component<MyIProps, MyPageState> {
               />
             </AtList>
           </AtAccordion>
+        </View>
+        <View className="a">
+          <FsrGrid data={
+            [
+              {
+                image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+                title: '积分',
+                value: '领取中心'
+              },
+              {
+                image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
+                title: '答题',
+                value: '找折扣'
+              },
+              {
+                image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
+                title: '相册',
+                value: '领会员'
+              }
+            ]
+          } />
         </View>
         <View>
           <AtList>
@@ -139,3 +190,4 @@ export default class Index extends Component<MyIProps, MyPageState> {
 //
 // #endregion
 
+export default Index

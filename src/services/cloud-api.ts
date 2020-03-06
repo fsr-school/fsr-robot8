@@ -8,7 +8,7 @@ export function createCloudApi(cb, apiId) {
       logger.groupCollapsed(`>>> cloud-api:${apiId}`)
       logger.log(res)
       logger.groupEnd()
-      resolve(res.result)
+      resolve(res)
     }, reason => {
       reject(reason)
     })

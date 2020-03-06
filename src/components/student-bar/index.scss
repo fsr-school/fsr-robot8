@@ -1,0 +1,48 @@
+@import '../../assets/style/theme.scss';
+@import '../../../node_modules/taro-ui/dist/style/components/icon.scss';
+@import '../../../node_modules/taro-ui/dist/style/components/flex.scss';
+
+
+.student-bar{
+  color: $color-text-base;
+  margin-top: $spacing-v-xl;
+  border-radius: $border-radius-lg $border-radius-lg 0 0;
+  padding: $spacing-v-lg $spacing-v-sm;
+  background-color: rgba(#ffffff, 0.8);
+  box-shadow: $at-fab-box-shadow;
+  text-align: left;
+
+  .at-col{
+
+
+    padding: 0 $spacing-v-sm;
+    &:nth-child(2){
+      .at-icon{
+        color: $color-text-disabled;
+      }
+
+
+      .student-bar-title{
+        line-height: $line-height-zh;
+      }
+      .student-bar-detail{
+        color: $color-text-paragraph;
+        font-size: $font-size-sm;
+        @include line(1);
+        width: 100%;
+      }
+    }
+    &:nth-child(3){
+      color: $color-text-disabled;
+      font-size: $icon-size-md;
+      text-align: right;
+
+      .student-bar-swap{
+        font-size: $font-size-base;
+        background-color: $color-brand-dark;
+        color: $color-text-base-inverse;
+      }
+     }
+  }
+
+}

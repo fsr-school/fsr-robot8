@@ -19,8 +19,7 @@ export function login() {
         name: 'login'
       }
     }).then(res => {
-      const {/* status,  */data } = res
-      resolve(data)
+      resolve(res.result)
     }).catch(err => {
       reject(err)
     })
@@ -67,8 +66,7 @@ export function setUserInfo({ uid, nickName, avatarUrl }) {
         data: { uid, nickName, avatarUrl }
       }
     }).then(res => {
-      const {/* status,  */data } = res
-      resolve(data)
+      resolve(res.result)
     }).catch(err => {
       reject(err)
     })
@@ -89,12 +87,12 @@ export function getSms({ phone }) {
         data: { phone }
       }
     }).then(res => {
-      const { status, data } = res
+      const { status } = res.result
       if (status != '0') {
         // todo-leon 错误处理，提示用户
-        reject(res)
+        reject(res.result)
       }
-      resolve(data)
+      resolve(res.result)
     }).catch(err => {
       reject(err)
     })

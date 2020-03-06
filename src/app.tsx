@@ -6,6 +6,8 @@ import models from './models/index'
 
 import { init } from '@/services/index'
 import Index from './pages/index'
+
+// import "taro-ui/dist/style/index.scss";
 import './app.scss'
 
 
@@ -17,7 +19,7 @@ import './app.scss'
 // }
 
 // 初始化数据接口
-init()
+// init()
 
 // dva初始化
 const dvaApp = dva.createApp({
@@ -28,6 +30,8 @@ const store = dvaApp.getStore()
 
 
 class App extends Component {
+  // @ts-ignore 配置默认参数
+  // private static defaultProps = {}
 
   // 注意：Taro组件的 constructor 与 render 默认会多调用一次
 
@@ -62,10 +66,11 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index',
-      'pages/timetable/index',
-      'pages/my/index',
-      'pages/webview/index',
+      'pages/test/index',
+      // 'pages/index/index',
+      // 'pages/timetable/index',
+      // 'pages/my/index',
+      // 'pages/webview/index',
     ],
     window: {
       backgroundTextStyle: 'dark',
@@ -73,32 +78,32 @@ class App extends Component {
       navigationBarTitleText: '恒星机器人',
       navigationBarTextStyle: 'white'
     },
-    tabBar: {
-      color: '#000',
-      selectedColor: '#37B13F',
-      backgroundColor: '#fff',
-      borderStyle: 'black',
-      list: [
-        {
-          text: '发现',
-          pagePath: 'pages/index/index',
-          iconPath: 'assets/images/icon-tabbar/discover.png', // #7A7E83
-          selectedIconPath: 'assets/images/icon-tabbar/discoverfill.png', // #37B13F
-        },
-        {
-          text: '课表',
-          pagePath: 'pages/timetable/index',
-          iconPath: 'assets/images/icon-tabbar/form.png',
-          selectedIconPath: 'assets/images/icon-tabbar/formfill.png',
-        },
-        {
-          text: '我的',
-          pagePath: 'pages/my/index',
-          iconPath: 'assets/images/icon-tabbar/my.png',
-          selectedIconPath: 'assets/images/icon-tabbar/myfill.png',
-        }
-      ]
-    },
+    // tabBar: {
+    //   color: '#000',
+    //   selectedColor: '#37B13F',
+    //   backgroundColor: '#fff',
+    //   borderStyle: 'black',
+    //   list: [
+    //     {
+    //       text: '发现',
+    //       pagePath: 'pages/index/index',
+    //       iconPath: 'assets/images/icon-tabbar/discover.png', // #7A7E83
+    //       selectedIconPath: 'assets/images/icon-tabbar/discoverfill.png', // #37B13F
+    //     },
+    //     {
+    //       text: '课表',
+    //       pagePath: 'pages/timetable/index',
+    //       iconPath: 'assets/images/icon-tabbar/form.png',
+    //       selectedIconPath: 'assets/images/icon-tabbar/formfill.png',
+    //     },
+    //     {
+    //       text: '我的',
+    //       pagePath: 'pages/my/index',
+    //       iconPath: 'assets/images/icon-tabbar/my.png',
+    //       selectedIconPath: 'assets/images/icon-tabbar/myfill.png',
+    //     },
+    //   ]
+    // },
   }
 
   // 在 App 类中的 render() 函数没有实际作用
