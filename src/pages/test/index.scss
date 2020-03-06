@@ -7,7 +7,7 @@
     overflow: hidden;
     padding: $spacing-v-xl $spacing-v-xl 0 $spacing-v-xl;
     background-color: $color-brand;
-    border-bottom: $border-radius-md $color-brand-light solid;
+    border-bottom: $border-radius-md $color-line-protruding solid;
     text-align: center;
 
     .my-avatar{
@@ -23,11 +23,9 @@
     }
   }
 
-  .my-user-score{
-    border: 1px blue solid;
-  }
 
-  .my-menu-bar{
+  .my-user-menu{
     margin-top: $spacing-v-lg;
   }
 }
+

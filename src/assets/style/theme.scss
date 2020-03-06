@@ -1,2 +1,15 @@
 @import "../../assets/style/custom-variables.scss";
 @import '../../assets/fonts/iconfont';
+
+
+.g-color-text-base{
+  color: $color-text-base;
+}
+
+.g-color-text-inverse{
+  color: $color-text-base-inverse;
+}
+
+.g-color-text-paragraph{
+  color: $color-text-paragraph;
+}

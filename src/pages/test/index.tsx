@@ -51,7 +51,7 @@ class Index extends Component<IProps, PageState> {
           <View className="my-nickname">李恒(11恒星机器人教育)<View className='at-icon at-icon-edit'></View></View>
           <StudentBar />
         </View>
-        <FsrGrid className="my-user-score" data={
+        <FsrGrid data={
           [
             {
               image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
@@ -70,21 +70,31 @@ class Index extends Component<IProps, PageState> {
             }
           ]
         } />
+        <View className="my-user-menu">
+          <AtList>
+            <AtListItem title='通知' arrow='right' extraText='+10'
+              iconInfo={{
+                size: 25, color: '#ffbf0f', value: 'bell'
+              }} />
+            <AtListItem title='帮助' arrow='right'
+              iconInfo={{
+                size: 25, color: '#37B13F', value: 'help',
+              }} />
+            <AtListItem title='设置' arrow='right'
+              iconInfo={{
+                size: 25, color: '#78A4FA', value: 'settings'
+              }} />
+          </AtList>
+        </View>
+        <View className="my-user-menu">
+          <AtList>
+            <AtListItem title='管理' arrow='right'
+              iconInfo={{
+                size: 25, color: 'red', value: 'user'
+              }} />
+          </AtList>
+        </View>
 
-        <AtList>
-          <AtListItem title='帮助' arrow='right'
-            iconInfo={{
-              size: 25, color: '#37B13F', value: 'help',
-            }} />
-          <AtListItem title='设置' arrow='right'
-            iconInfo={{
-              size: 25, color: '#78A4FA', value: 'settings'
-            }} />
-          <AtListItem title='管理' arrow='right'
-            iconInfo={{
-              size: 25, color: 'red', value: 'user'
-            }} />
-        </AtList>
       </View>
     )
   }

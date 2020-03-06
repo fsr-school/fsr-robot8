@@ -8,17 +8,18 @@ $color-brand: #37B13F;
 $color-brand-light: #79E380;
 $color-brand-dark: #0A5E0F;
 
+ /* Text Color */
+ $color-text-secondary: #B1A2DB; // 辅助色
+ $color-text-secondary2: #E1C746; // 辅助色
+
 /*
 主色:      #37B13F		#407543		#0A5E0F		#79E380		#A1E3A5
 辅助色 A:  #543C9A		#473D67		#1C0A52		#9780DB		#B1A2DB
-辅助色 B:  #E1C746		#958A51		#77650C		#F4E182		#F4E8AD
+辅助色 B:  #E1C746		#958A51		#77650C		#F4E182		#F4E8AD  #cce099
 互补色:    #E14946		#955351		#770F0C		#F48582		#F4AFAD
  */
 
 
- $color-page-bg:$color-grey-5; // 页面背景色
-
- /* Text Color */
- $color-text-secondary: #B1A2DB; // 辅助色
- $color-text-secondary2: #E1C746; // 辅助色
- $color-text-placeholder: #f00;
+ $color-page-bg: $color-grey-5; // 页面背景色
+ $color-line-protruding: #ffd56a; // 分隔线突出色
+ $color-icon-protruding: #ffbf0f; // 图标突出色

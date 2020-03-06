@@ -3,3 +3,40 @@
 @import '../../../node_modules/taro-ui/dist/style/components/icon.scss';
 @import '../../../node_modules/taro-ui/dist/style/components/flex.scss';
 
+.fsr-grid{
+  background-color: $color-bg;
+  padding: $spacing-h-xl 0 $spacing-h-xl * 2 0;
+
+  .at-col{
+    position: relative;
+    text-align: center;
+    border-right: 1px $color-grey-3 solid;
+    padding: $spacing-h-sm 0 $spacing-h-xl 0;
+
+    &:last-child {
+      border-right: 0;
+    }
+
+    .fsr-grid--title{
+      line-height: $line-height-zh;
+      font-size: $font-size-sm;
+      .at-icon{
+        line-height: $line-height-zh;
+        font-size: $font-size-xl;
+        margin-right: $spacing-v-xs;
+        vertical-align: middle;
+      }
+    }
+
+    .fsr-grid--detail{
+      width: 100%;
+      z-index: 10;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding-top: $spacing-h-lg * 2;
+      line-height: $line-height-zh * 2;
+      text-align: center;
+    }
+  }
+}
