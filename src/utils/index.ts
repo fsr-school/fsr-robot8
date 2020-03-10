@@ -1,34 +1,24 @@
-import Taro from '@tarojs/taro'
 
-export function showToDoToast() {
-  Taro.showToast({
-    title: '暂未实现，敬请期待',
-    icon: 'none'
-  })
-}
-
-
-
-/**
- * 设置运行最小时间间隔，让调用它时距上一次调用不够时间时，就使用 sleep 确保每次调用间隔时间相同
- * @param {number} [time=0] - 初始时间（毫秒值）
- */
-export function getTimeGap(time = 0) {
-  return async function gap(gapTime) {
-    const t = gapTime - (Date.now() - time);
-    t > 0 && await sleep(t);
-    time = Date.now();
-    return t;
+export function dateFormat(fmt = 'YYYY-mm-dd HH:MM', date = new Date()) {
+  let ret;
+  const opt = {
+    'Y+': date.getFullYear().toString(),        // 年
+    'm+': (date.getMonth() + 1).toString(),     // 月
+    'd+': date.getDate().toString(),            // 日
+    'H+': date.getHours().toString(),           // 时
+    'M+': date.getMinutes().toString(),         // 分
+    'S+': date.getSeconds().toString()          // 秒
+    // 有其他格式化字符需求可以继续添加，必须转化成字符串
   };
+  for (let k in opt) {
+    ret = new RegExp('(' + k + ')').exec(fmt);
+    if (ret) {
+      fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, '0')))
+    };
+  };
+  return fmt;
 }
 
-/**
- * 让程序休止一定时间
- * @param {number} [time=1000] - 毫秒数
- */
-export async function sleep(time = 1000) {
-  return new Promise(resolve => {
-    time > 0 ? setTimeout(() => resolve(time), time) : resolve(time)
-  });
-}
+
+
 

@@ -1,7 +1,15 @@
-import logger from '../utils/logger'
-import { IS_DEV } from '../config/index'
+import Taro from '@tarojs/taro'
+
+import { showSuccessToast, showToast, showLoadingToast, hideToast } from '@/utils/toast';
+import logger from '@/utils/logger'
+import { IS_DEV } from '@/config/index'
+
+import { createCloudApi } from './cloud-api'
+import { createWxApi } from './wx-api'
 
 const { cloud } = wx;
+
+
 /**
  * 微信云开发初始化
  */
@@ -33,3 +41,58 @@ export function init() {
   is_init = true
   initWXCloud()
 }
+
+/**
+ * 上传图片
+ */
+export function uploadImage({ filePath, type, name,
+  onProgressUpdate = (res) => {
+    logger.log('上传进度', res.progress, res.totalBytesSent, res.totalBytesExpectedToSend)
+  },
+  getAbort = (abort: Function) => abort }) {
+  return createCloudApi((resolve, reject) => {
+    // loading
+    showLoadingToast({ title: '上传中' })
+    // 上传图片
+    const cloudPath = type + '/' + name + filePath.match(/\.[^.]+?$/)[0]
+    const uploadTask = cloud.uploadFile({
+      cloudPath,
+      filePath,
+      success: res => {
+        showSuccessToast({ title: '上传成功' })
+        resolve(res.fileID)
+      },
+      fail: err => {
+        showToast({ title: '上传失败' })
+        reject(err)
+      },
+      complete: () => {
+        // hide loading
+        hideToast()
+      }
+    })
+    // 处理上传进度
+    uploadTask.onProgressUpdate(onProgressUpdate)
+    // 取消上传任务
+    getAbort(uploadTask.abort)
+  }, 'index.uploadImage')
+}
+
+
+/**
+ * 选择图片
+ */
+export function chooseImage({ count = 1 }) {
+  return createWxApi((resolve, reject) => {
+    Taro.chooseImage({
+      count: count,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+    }).then(res => {
+      resolve(res.tempFiles) // {path, size}
+    }).catch(err => {
+      reject(err)
+    })
+  }, 'index.chooseImage')
+}
+
