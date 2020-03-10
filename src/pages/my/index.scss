@@ -1,0 +1,42 @@
+
+@import '../../assets/style/theme.scss';
+
+.my{
+
+  .my-user-info{
+    overflow: hidden;
+    padding: $spacing-v-xl $spacing-v-xl 0 $spacing-v-xl;
+    background-color: $color-brand;
+    border-bottom: $border-radius-md $color-line-protruding solid;
+    text-align: center;
+
+    .my-user-login-bt{
+      width: 40%;
+      font-size: $font-size-xl;
+      line-height: 2;
+      background: none;
+      border: 1px white solid;
+      color: white;
+      opacity: 0.8;
+    }
+
+    .my-avatar{
+      margin: $spacing-v-xl auto;
+      border: $border-radius-sm rgba($color-brand, 0.5) solid;
+    }
+    .my-nickname{
+      line-height: 2;
+      font-size: $font-size-lg;
+      color: $color-text-base-inverse;
+      .at-icon{
+        color: $color-text-secondary2;
+      }
+    }
+  }
+
+
+  .my-user-menu{
+    margin-top: $spacing-v-lg;
+  }
+}
+

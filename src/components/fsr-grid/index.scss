@@ -37,6 +37,15 @@
       padding-top: $spacing-h-lg * 2;
       line-height: $line-height-zh * 2;
       text-align: center;
+
+      &-score{
+        color: $color-brand;
+      }
+
+      &-unit{
+        font-size: $font-size-sm;
+        padding-left: $spacing-v-xs;
+      }
     }
   }
 }

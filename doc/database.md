@@ -9,7 +9,14 @@
   - [管理帐户](#%e7%ae%a1%e7%90%86%e5%b8%90%e6%88%b7)
   - [超级管理帐户](#%e8%b6%85%e7%ba%a7%e7%ae%a1%e7%90%86%e5%b8%90%e6%88%b7)
 - [数据表](#%e6%95%b0%e6%8d%ae%e8%a1%a8)
+  - [`backdb` 数据库备份](#backdb-%e6%95%b0%e6%8d%ae%e5%ba%93%e5%a4%87%e4%bb%bd)
   - [`config` 系统配置](#config-%e7%b3%bb%e7%bb%9f%e9%85%8d%e7%bd%ae)
+  - [`sms` 短信验证](#sms-%e7%9f%ad%e4%bf%a1%e9%aa%8c%e8%af%81)
+  - [`students` 学生档案](#students-%e5%ad%a6%e7%94%9f%e6%a1%a3%e6%a1%88)
+  - [`timetable` 时间表](#timetable-%e6%97%b6%e9%97%b4%e8%a1%a8)
+  - [`user` 用户](#user-%e7%94%a8%e6%88%b7)
+- [客户端静态配置表](#%e5%ae%a2%e6%88%b7%e7%ab%af%e9%9d%99%e6%80%81%e9%85%8d%e7%bd%ae%e8%a1%a8)
+  - [管理权限](#%e7%ae%a1%e7%90%86%e6%9d%83%e9%99%90)
 
 # 功能
 
@@ -34,6 +41,9 @@
 - 由 `管理帐户` 进行绑定和解绑。
 - 可以绑定 `5` 个 `普通帐户`。
 - 可以绑定 `5` 个 `老师帐户`。
+- 积分需要`得分记录`和`扣除记录`。
+- 答题记录。
+- 相册管理。
 ## 班级信息
 - 由 `管理帐户` 创建，并指定 `老师帐户` 的访问权限。
 - 由 `老师帐户` 进行管理操作。
@@ -84,6 +94,20 @@
 
 # 数据表
 
+## `backdb` 数据库备份
+
+```json
+[
+  {
+    "_id": "xxx",
+    "collection": "备份的集合名称",
+    "date": 备份的日期,
+    "job_id": 备份任务id(可以取出备份文件URL),
+  },
+  ...
+]
+```
+
 ## `config` 系统配置
 
 ```json
@@ -117,7 +141,82 @@
 ]
 ```
 
-客户端静态配置表
+## `sms` 短信验证
+
+```json
+[
+  {
+    "_id": "xxx",
+    "_openid": "微信openid",
+    "phone": "手机号",
+    "PIN": "验证码",
+    "expire_time": 验证码的过期时间,
+  },
+  ...
+]
+```
+
+## `students` 学生档案
+
+```json
+[
+  {
+    "_id": "xxx",
+    "name": "学生姓名",
+    "birthday": 出生日志,
+    "sex": true 男、false 女,
+    "create_time": 创建时间,
+    "remark": "备注(家长不可见)",
+    "subjects": [{
+      "id":"学习科目id", 
+      "time":"报名时间", 
+      "status":"在学/学完/停学/退学",
+    }, ...]
+  },
+  ...
+]
+```
+
+## `timetable` 时间表
+
+```json
+[
+  {
+    "_id": "xxx",
+    "_openid": "微信openid",
+    "avatarUrl": "手机号",
+    "nickName": "验证码",
+    "phone": "手机号",
+    "students": ["学生id", "学生id"],
+    "create_time": 创建时间,
+    "update_time": 最后登录或更新时间,
+  },
+  ...
+]
+```
+
+## `user` 用户
+
+```json
+[
+  {
+    "_id": "xxx",
+    "_openid": "微信openid",
+    "avatarUrl": "手机号",
+    "nickName": "验证码",
+    "phone": "手机号",
+    "students": ["学生id", "学生id"],
+    "create_time": 创建时间,
+    "update_time": 最后登录或更新时间,
+  },
+  ...
+]
+```
+
+# 客户端静态配置表
+
+## 管理权限
+
 ```js
 const functionIds = {
   "admin.student": "管理所有学生",

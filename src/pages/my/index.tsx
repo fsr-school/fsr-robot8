@@ -1,10 +1,10 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 
-import { View, Text, Button } from '@tarojs/components'
-import { AtList, AtListItem, AtAccordion, AtAvatar } from "taro-ui"
+import { View, Button } from '@tarojs/components'
+import { AtList, AtListItem, AtAvatar } from "taro-ui"
 
-import { StudentBar, FsrGrid } from "@/components/index";
+import { StudentBar, StudentGrid } from "@/components/index";
 
 import './index.scss'
 
@@ -92,92 +92,50 @@ class Index extends Component<IProps, PageState> {
 
   render() {
     const { scopeUserInfo, avatarUrl, nickName, auth } = this.props.my
-    // const { id } = this.$router.params
-    console.log(this.props.my);
-
     return (
-      <View className='my'>
-        <View className="-user-info">
-          {scopeUserInfo
-            ?
-            <View className="info">
-              <AtAvatar circle image={avatarUrl}></AtAvatar>
-              <Text className="username">{nickName}</Text>
-            </View>
-            :
-            <Button openType="getUserInfo" onGetUserInfo={this.onGetUserInfo}>登录</Button>
+      <View className='page my'>
+        <View className="my-user-info">
+          <AtAvatar circle size='large' className='my-avatar' image={avatarUrl}></AtAvatar>
+          {
+            scopeUserInfo
+              ?
+              <View className="my-nickname">{nickName}<View className='at-icon at-icon-edit'></View></View>
+              :
+              <Button className='my-user-login-bt' openType="getUserInfo" onGetUserInfo={this.onGetUserInfo}>登录</Button>
           }
           <StudentBar />
-          <AtAccordion className="children" title='正在管理学生：李晗亮'
-            open={this.state.openChildren}
-            onClick={this.handleClick.bind(this)}
-            icon={{ value: 'user', color: 'red', size: '15' }}>
-            <AtList hasBorder={false}>
-              <AtListItem
-                title='李晗亮'
-                arrow='right'
-                thumb='https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png'
-              />
-              <AtListItem
-                title='郝雅婷'
-                note='描述信息'
-                arrow='right'
-                thumb='http://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'
-              />
-            </AtList>
-          </AtAccordion>
         </View>
-        <View className="a">
-          <FsrGrid data={
-            [
-              {
-                image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
-                title: '积分',
-                value: '领取中心'
-              },
-              {
-                image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
-                title: '答题',
-                value: '找折扣'
-              },
-              {
-                image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
-                title: '相册',
-                value: '领会员'
-              }
-            ]
-          } />
-        </View>
-        <View>
+        <StudentGrid />
+        <View className="my-user-menu">
           <AtList>
-            <AtListItem title='积分' extraText='125' arrow='right'
+            <AtListItem title='通知' arrow='right' extraText='+10'
               iconInfo={{
-                size: 25, color: '#32cc0a', value: 'sketch',
+                size: 25, color: '#ffbf0f', value: 'bell'
               }} />
-            <AtListItem title='相册' extraText='+10' arrow='right'
+            <AtListItem title='帮助' arrow='right'
               iconInfo={{
-                size: 25, color: '#78A4FA', value: 'image',
+                size: 25, color: '#37B13F', value: 'help',
               }} />
-            <AtListItem title='留言' extraText='+3' arrow='right'
-              iconInfo={{
-                size: 25, color: '#ee9900', value: 'message',
-              }} />
-          </AtList>
-        </View>
-        <View>
-          <AtList>
             <AtListItem title='设置' arrow='right'
               iconInfo={{
                 size: 25, color: '#78A4FA', value: 'settings'
               }} />
-            {
-              auth && auth.includes('管理入口') && <AtListItem title='管理' arrow='right'
-                iconInfo={{
-                  size: 25, color: '#32cc0a', value: 'user'
-                }} />
-            }
           </AtList>
         </View>
+        {
+          auth && auth.includes('管理入口') &&
+          <View className="my-user-menu">
+            <AtList>
+              <AtListItem title='管理' arrow='right'
+                onClick={() => {
+                  Taro.navigateTo({ url: '../admin/index' })
+                }}
+                iconInfo={{
+                  size: 25, color: 'red', value: 'user'
+                }} />
+            </AtList>
+          </View>
+        }
       </View>
     )
   }

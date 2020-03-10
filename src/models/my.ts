@@ -1,10 +1,13 @@
+import { avatarBg } from '@/utils/image'
 import { login, getUserInfo, setUserInfo } from '@/services/my'
 let tempAuth = []
 let scopeUserInfo = false
 
 export default {
   namespace: 'my',
-  state: {},
+  state: {
+    avatarUrl: avatarBg,
+  },
   effects: {
     *eLogin(_, { call, put }) {
       const res = yield call(login)

@@ -4,17 +4,19 @@ import { View, Text } from '@tarojs/components'
 
 import './index.scss'
 
-
-
 type PageStateProps = {
   className?: string,
   data: Array<{
-    image: string,
+    icon: {
+      name: string,
+      color?: string
+    },
     title: string,
-    value: string,
+    score?: string,
+    unit?: string,
+    onClick?: () => any,
   }>
 }
-
 
 type PageDispatchProps = {}
 
@@ -31,36 +33,25 @@ interface Index {
 
 class Index extends Component<IProps, PageState> {
 
-  // @ts-ignore 配置默认参数
-  private static defaultProps = {
-    mode: 'rect'
-  }
-
   render() {
-    const { className } = this.props
-
+    const { className, data } = this.props
     return (
-      <View className={'fsr-grid at-row ' + (className || '')}>
-        <View className='at-col'>
-          <View className="fsr-grid--title">
-            <View className='at-icon at-icon-star' style='color:#E14946'></View>积分
+      <View className={`fsr-grid at-row ${className || ''}`}>
+        {
+          data && data.map(res => {
+            const { icon, title, score, unit, onClick } = res
+            return <View className='at-col' onClick={onClick}>
+              <View className="fsr-grid--title">
+                {icon && <View className={`at-icon ${icon.name}`} style={`color:${icon.color}`}></View>}
+                {title}
+              </View>
+              <View className="fsr-grid--detail">
+                <Text className="fsr-grid--detail-score">{score}</Text>
+                <Text className="fsr-grid--detail-unit">{unit}</Text>
+              </View>
             </View>
-          <View className="fsr-grid--detail">103分</View>
-        </View>
-        <View className='at-col'>
-          <View className="fsr-grid--title">
-            <View className='at-icon at-icon-check' style='color:#37B13F'></View>答题</View>
-          <View className="fsr-grid--detail">
-            <Text className="g-color-text-paragraph">20</Text>/32题
-            </View>
-        </View>
-        <View className='at-col'>
-          <View className="fsr-grid--title">
-            <View className='at-icon at-icon-image' style='color:#B1A2DB'></View>相册</View>
-          <View className="fsr-grid--detail">
-            <Text className="g-color-text-paragraph">10</Text>/169张
-            </View>
-        </View>
+          })
+        }
       </View>
     )
   }

@@ -1,8 +1,3 @@
-/* 改变主题变量，具体变量名可查看 taro-ui/dist/style/variables/default.scss 文件 */
-// 注意：要用相对路径引用 node_modules 包文件，否则 scss/color 这些插件将无法使用。
-@import '../../../node_modules/taro-ui/dist/style/variables/default.scss';
-/* Mixin */
-@import '../../../node_modules/taro-ui/dist/style/mixins/index.scss';
 
 $color-brand: #37B13F;
 $color-brand-light: #79E380;
@@ -11,6 +6,15 @@ $color-brand-dark: #0A5E0F;
  /* Text Color */
  $color-text-secondary: #B1A2DB; // 辅助色
  $color-text-secondary2: #E1C746; // 辅助色
+
+
+ /* 改变主题变量，具体变量名可查看 taro-ui/dist/style/variables/default.scss 文件 */
+// 注意：要用相对路径引用 node_modules 包文件，否则 scss/color 这些插件将无法使用。
+@import '../../../node_modules/taro-ui/dist/style/variables/default.scss';
+/* Mixin */
+@import '../../../node_modules/taro-ui/dist/style/mixins/index.scss';
+
+
 
 /*
 主色:      #37B13F		#407543		#0A5E0F		#79E380		#A1E3A5

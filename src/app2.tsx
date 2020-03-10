@@ -65,13 +65,8 @@ class App extends Component {
   config: Config = {
     // 配置使用页面，第1个为显示第1页
     pages: [
-      'pages/my/index',
-      'pages/index/index',
-      'pages/timetable/index',
-      'pages/webview/index',
+      'pages/test/index',
       'pages/cropper/index',
-      'pages/admin/index',
-      'pages/admin-create-student/index',
     ],
     window: {
       backgroundTextStyle: 'dark',
@@ -87,19 +82,19 @@ class App extends Component {
       list: [
         {
           text: '发现',
-          pagePath: 'pages/index/index',
+          pagePath: 'pages/test/index',
           iconPath: 'assets/images/icon-tabbar/discover.png', // #7A7E83
           selectedIconPath: 'assets/images/icon-tabbar/discoverfill.png', // #37B13F
         },
         {
           text: '课表',
-          pagePath: 'pages/timetable/index',
+          pagePath: 'pages/test/index',
           iconPath: 'assets/images/icon-tabbar/form.png',
           selectedIconPath: 'assets/images/icon-tabbar/formfill.png',
         },
         {
           text: '我的',
-          pagePath: 'pages/my/index',
+          pagePath: 'pages/test/index',
           iconPath: 'assets/images/icon-tabbar/my.png',
           selectedIconPath: 'assets/images/icon-tabbar/myfill.png',
         },
