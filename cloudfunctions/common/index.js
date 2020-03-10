@@ -5,6 +5,7 @@ cloud.init({ env: envId })
 
 const fns = {
   user: require('./src/user'),
+  student: require('./src/student'),
 }
 
 // 接口函数书写规则：

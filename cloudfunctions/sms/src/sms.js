@@ -12,7 +12,6 @@ async function sendPIN({ OPENID, phone }) {
     const TIME = '10'
     const PIN = Math.random().toString().slice(-4)
     const params = [PIN, TIME]
-    logger.warn({ id: 9999, PIN });
     // 发送短信
     sendSms({ phone, params }).then(async response => {
       logger.warn({ id: '88-88', phone, OPENID: String(OPENID) + 'OPENID' });
@@ -21,14 +20,10 @@ async function sendPIN({ OPENID, phone }) {
         _openid: OPENID
       }).get()
 
-      logger.warn({ id: 777, v: res && JSON.stringify(res) });
       const _doc = res.data[0]
 
-      logger.warn({ id: 1111, v: _doc && JSON.stringify(_doc) });
       const time = new Date()
-      logger.warn({ id: 2222, time });
       const expire_time = new Date(time.valueOf() + TIME * 60000)
-      logger.warn({ id: 3333, expire_time });
       const opt = {
         data: {
           _openid: OPENID,
