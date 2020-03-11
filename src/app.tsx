@@ -65,13 +65,22 @@ class App extends Component {
   config: Config = {
     // 配置使用页面，第1个为显示第1页
     pages: [
-      'pages/my/index',
+      // 首页
       'pages/index/index',
+      // 课程表
       'pages/timetable/index',
+      // 我的
+      'pages/my/index',
+      // 打开的外部链接 ?url=encodeURIComponent(url) 需转码，请使用 openWebView() @ utils/index
       'pages/webview/index',
+      // ?state=xxx 上一页接收裁剪后图片地址的状态属性名
       'pages/cropper/index',
+      // 管理
       'pages/admin/index',
-      'pages/admin-create-student/index',
+      // 管理 - 学生档案：创建、编辑、分享
+      'pages/admin-student/index',
+      // 管理 - 学生档案列表：搜索、列表、编辑、分页、删除
+      'pages/admin-student-list/index',
     ],
     window: {
       backgroundTextStyle: 'dark',

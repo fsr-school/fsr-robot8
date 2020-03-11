@@ -36,10 +36,17 @@ class Index extends Component<IProps, PageState> {
         <AtList>
           <AtListItem title='创建学生档案' arrow='right'
             onClick={() => {
-              Taro.navigateTo({ url: '../admin-create-student/index' })
+              Taro.navigateTo({ url: '../admin-student/index' })
             }}
             iconInfo={{
               size: 25, color: '#37B13F', value: 'user'
+            }} />
+          <AtListItem title='学生档案列表' arrow='right'
+            onClick={() => {
+              Taro.navigateTo({ url: '../admin-student-list/index' })
+            }}
+            iconInfo={{
+              size: 25, color: '#37B13F', value: 'list'
             }} />
         </AtList>
       </View>

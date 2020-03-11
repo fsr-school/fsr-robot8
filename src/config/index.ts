@@ -10,6 +10,21 @@ export const IS_DEV = process.env.NODE_ENV === 'development'
 export const BASE_URL = IS_DEV ? 'http://localhost:3000' : 'http://localhost:3000'
 
 /**
+ * 微信云开发环境
+ */
+export const CLOUD_ENV = IS_DEV ? 'fsr-back-robot8' : 'fsr-robot8'
+
+/**
+ * 云存储路径前缀 cloud:// 开头
+ */
+export const CLOUD_FILE_URL = IS_DEV ? 'cloud://fsr-back-robot8.6673-fsr-back-robot8-1254200085' : 'cloud://fsr-robot8.6673-fsr-robot8-1254200085'
+
+/**
+ * 云存储真实链接，公有读的文件获取的链接不会过期 https:// 开头
+ */
+export const CLOUD_FILE_HTTP_URL = IS_DEV ? 'https://6673-fsr-back-robot8-1254200085.tcb.qcloud.la' : 'https://6673-fsr-robot8-1254200085.tcb.qcloud.la'
+
+/**
  * 应用逻辑错误信息
  */
 export const APP_ERROR = {

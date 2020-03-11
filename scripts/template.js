@@ -40,11 +40,16 @@ interface Index {
 
 // @connect(({ }) => ({}), (dispatch) => ({}))
 class Index extends Component<IProps, PageState> {
-  state = {
-  }
 
   config: Config = {
     navigationBarTitleText: '恒星 - xx'
+  }
+
+  constructor() {
+    super(...arguments)
+    this.state = {
+
+    }
   }
 
   render() {

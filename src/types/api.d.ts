@@ -1,14 +1,27 @@
-// declare namespace API {
-//   export interface Response {
-//     data: any,
-//     errMsg: string,
-//     statusCode: number,
-//     header: any,
-//     cookies: Array<{
-//       name: string,
-//       value: string,
-//       expires: string,
-//       path: string
-//     }>,
-//   }
-// }
+declare namespace CloudAPI {
+
+  export interface FunctionResult {
+    result: {
+      status: number,
+      data?: any
+    },
+    requestID?: string
+  }
+
+}
+
+
+declare namespace API {
+  export interface Response {
+    data: any,
+    errMsg: string,
+    statusCode: number,
+    header: any,
+    cookies: Array<{
+      name: string,
+      value: string,
+      expires: string,
+      path: string
+    }>,
+  }
+}

@@ -1,7 +1,6 @@
 import { showLoadingToast, hideToast } from '@/utils/toast';
 
 import { createCloudApi } from './cloud-api'
-import { uploadImage } from './index'
 
 const { cloud } = wx;
 
@@ -10,11 +9,11 @@ const { cloud } = wx;
 /**
  * 创建学生档案
  */
-export function createStudent({ avatarUrl, name, sex, birthday, remark }) {
+export function createStudent({ name, sex, birthday, remark }) {
   return createCloudApi((resolve, reject) => {
     // loading
     showLoadingToast({ title: '数据请求中' })
-    // 上传图片
+    // 创建学生档案
     cloud.callFunction({
       name: 'common',
       data: {
@@ -23,26 +22,96 @@ export function createStudent({ avatarUrl, name, sex, birthday, remark }) {
         data: {
           name,
           sex,
-          birthday: new Date(birthday),
+          birthday,
           remark,
         }
       }
-    }).then(res => {
+    }).then((res: CloudAPI.FunctionResult) => {
       hideToast()
       const { data } = res.result
-      uploadImage({
-        type: 'student_avatar',
-        filePath: avatarUrl,
-        name,
-      }).then(res => {
-        resolve({ _id: data, avatarUrl: res })
-      }).catch(err => {
-        hideToast()
-        reject(err)
-      })
+      resolve({ _id: data })
     }).catch(err => {
       hideToast()
       reject(err)
     })
   }, 'student.createStudent')
+}
+
+
+/**
+ * 保存学生档案
+ */
+export function setStudent({ _id, name, sex, birthday, remark }) {
+  return createCloudApi((resolve, reject) => {
+    // loading
+    showLoadingToast({ title: '数据请求中' })
+    // 创建学生档案
+    cloud.callFunction({
+      name: 'common',
+      data: {
+        space: 'student',
+        name: 'setStudent',
+        data: {
+          _id,
+          name,
+          sex,
+          birthday,
+          remark,
+        }
+      }
+    }).then(() => {
+      hideToast()
+      resolve()
+    }).catch(err => {
+      hideToast()
+      reject(err)
+    })
+  }, 'student.setStudent')
+}
+
+
+/**
+ * 获取学生档案
+ */
+export function getStudent({ _id }) {
+  return createCloudApi((resolve, reject) => {
+    // 创建学生档案
+    cloud.callFunction({
+      name: 'common',
+      data: {
+        space: 'student',
+        name: 'getStudent',
+        data: {
+          _id,
+        }
+      }
+    }).then((res: CloudAPI.FunctionResult) => {
+      const { data } = res.result
+      resolve(data)
+    }).catch(err => {
+      reject(err)
+    })
+  }, 'student.getStudent')
+}
+
+/**
+ * 获取学生档案列表
+ */
+export function getStudentList() {
+  return createCloudApi((resolve, reject) => {
+    cloud.callFunction({
+      name: 'common',
+      data: {
+        space: 'student',
+        name: 'getStudentList',
+        data: {
+        }
+      }
+    }).then((res: CloudAPI.FunctionResult) => {
+      const { data } = res.result
+      resolve(data)
+    }).catch(err => {
+      reject(err)
+    })
+  }, 'student.getStudentList')
 }

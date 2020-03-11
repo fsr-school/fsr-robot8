@@ -1,24 +1,124 @@
 
-export function dateFormat(fmt = 'YYYY-mm-dd HH:MM', date = new Date()) {
-  let ret;
-  const opt = {
-    'Y+': date.getFullYear().toString(),        // 年
-    'm+': (date.getMonth() + 1).toString(),     // 月
-    'd+': date.getDate().toString(),            // 日
-    'H+': date.getHours().toString(),           // 时
-    'M+': date.getMinutes().toString(),         // 分
-    'S+': date.getSeconds().toString()          // 秒
-    // 有其他格式化字符需求可以继续添加，必须转化成字符串
-  };
-  for (let k in opt) {
-    ret = new RegExp('(' + k + ')').exec(fmt);
-    if (ret) {
-      fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, '0')))
-    };
-  };
-  return fmt;
+/**
+ * 打开新窗口，显示外部链接页面（仅限与小程序绑定的公众号等）
+ */
+export function openWebView({ url }) {
+  Taro.navigateTo({ url: 'pages/webview/index?url=' + encodeURIComponent(url) })
 }
 
+/**
+ * 打开新窗口，显示外部链接页面（仅限与小程序绑定的公众号等）
+ */
+export function appShareAppMessage() {
+  return {
+    title: '恒星机器人欢迎您',
+    path: '/pages/index/index'
+  }
+}
 
+export function easyCompare(x, y) {
+  for (const k in x) {
+    if (x.hasOwnProperty(k)) {
+      if (x[k] !== y[k]) return false
+    }
+  }
+  return true
+}
 
+/**
+ * 深度比较对象是否相同
+ */
+export function deepCompare(..._) {
+  if (arguments.length < 2) return true
 
+  let i, l, leftChain, rightChain
+
+  function compare2Objects(x, y) {
+    let p
+
+    if (isNaN(x) && isNaN(y) && typeof x === 'number' && typeof y === 'number') {
+      return true
+    }
+
+    if (x === y) {
+      return true
+    }
+
+    if ((typeof x === 'function' && typeof y === 'function') ||
+      (x instanceof Date && y instanceof Date) ||
+      (x instanceof RegExp && y instanceof RegExp) ||
+      (x instanceof String && y instanceof String) ||
+      (x instanceof Number && y instanceof Number)) {
+      return x.toString() === y.toString()
+    }
+
+    if (!(x instanceof Object && y instanceof Object)) {
+      return false
+    }
+
+    if (x.isPrototypeOf(y) || y.isPrototypeOf(x)) {
+      return false
+    }
+
+    if (x.constructor !== y.constructor) {
+      return false
+    }
+
+    if (x.prototype !== y.prototype) {
+      return false
+    }
+
+    if (leftChain.indexOf(x) > -1 || rightChain.indexOf(y) > -1) {
+      return false
+    }
+
+    for (p in y) {
+      if (y.hasOwnProperty(p) !== x.hasOwnProperty(p)) {
+        return false
+      } else if (typeof y[p] !== typeof x[p]) {
+        return false
+      }
+    }
+
+    for (p in x) {
+      if (y.hasOwnProperty(p) !== x.hasOwnProperty(p)) {
+        return false
+      } else if (typeof y[p] !== typeof x[p]) {
+        return false
+      }
+
+      switch (typeof (x[p])) {
+        case 'object':
+        case 'function':
+
+          leftChain.push(x)
+          rightChain.push(y)
+
+          if (!compare2Objects(x[p], y[p])) {
+            return false
+          }
+
+          leftChain.pop()
+          rightChain.pop()
+          break
+
+        default:
+          if (x[p] !== y[p]) {
+            return false
+          }
+          break
+      }
+    }
+    return true
+  }
+
+  for (i = 1, l = arguments.length; i < l; i++) {
+    leftChain = []
+    rightChain = []
+    if (!compare2Objects(arguments[0], arguments[i])) {
+      return false
+    }
+  }
+
+  return true
+}

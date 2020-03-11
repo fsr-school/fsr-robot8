@@ -4,7 +4,7 @@ $color-brand-light: #79E380;
 $color-brand-dark: #0A5E0F;
 
  /* Text Color */
- $color-text-secondary: #B1A2DB; // 辅助色
+ $color-text-secondary: #5D74B1; // 辅助色
  $color-text-secondary2: #E1C746; // 辅助色
 
 
@@ -17,13 +17,14 @@ $color-brand-dark: #0A5E0F;
 
 
 /*
-主色:      #37B13F		#407543		#0A5E0F		#79E380		#A1E3A5
-辅助色 A:  #543C9A		#473D67		#1C0A52		#9780DB		#B1A2DB
-辅助色 B:  #E1C746		#958A51		#77650C		#F4E182		#F4E8AD  #cce099
-互补色:    #E14946		#955351		#770F0C		#F48582		#F4AFAD
+ 主色:    #37B13F		#3D9B44		#229229		#4EC456		#5CC462  #79E380  #0A5E0F
+辅助色 A: #3B5397		#3D5084		#243C7D		#526CB1		#5D74B1
+辅助色 B: #E1E146		#C5C54E		#BABA2B		#E8E85C		#E8E86C #E1C746
+互补色:   #E14A46		#C5514E		#BA2F2B		#E8605C		#E86F6C
  */
-
 
  $color-page-bg: $color-grey-5; // 页面背景色
  $color-line-protruding: #ffd56a; // 分隔线突出色
  $color-icon-protruding: #ffbf0f; // 图标突出色
+ $color-girl: rgba(255, 224, 203, 0.6); // 图标突出色
+

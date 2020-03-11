@@ -16,7 +16,6 @@ export default class Index extends Component {
           score: '103',
           unit: '分',
           onClick: () => {
-            Taro.navigateTo({ url: '../webview/index' })
           }
         },
         {
@@ -25,7 +24,6 @@ export default class Index extends Component {
           score: '20/32',
           unit: '题',
           onClick: () => {
-            Taro.navigateTo({ url: '../webview/index' })
           }
         },
         {
@@ -34,7 +32,6 @@ export default class Index extends Component {
           score: '10/169',
           unit: '张',
           onClick: () => {
-            Taro.navigateTo({ url: '../webview/index' })
           }
         }
       ]} />

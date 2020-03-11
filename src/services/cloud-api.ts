@@ -1,7 +1,6 @@
 import { APP_ERROR, CLOUD_ERROR } from '../config/index'
 import logger from '../utils/logger'
 
-
 export function createCloudApi(cb, apiId): any {
   return new Promise((resolve, reject) => {
     cb(res => {

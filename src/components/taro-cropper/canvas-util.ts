@@ -1,4 +1,4 @@
-import {Color} from "@tarojs/taro";
+import { Color } from "@tarojs/taro";
 import CanvasContext = Taro.CanvasContext;
 
 function compareVersion(v1, v2) {
@@ -58,7 +58,6 @@ function easySetStrokeStyle(systemInfo: Taro.getSystemInfoSync.Return, canvasCon
     if (typeof color === "string") {
       canvasContext.strokeStyle = color
     }
-    console.log("2333");
   });
 }
 

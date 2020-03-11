@@ -15,15 +15,17 @@
 
 > 返回数据结构
 
-```json
-{
-  "result":{
-    "status": 0,
-    "data":{
-      ...
-    }
-  },
-  "requestID":"xxx"
+```ts
+declare namespace CloudAPI {
+
+  export interface FunctionResult {
+    result: {
+      status: number,
+      data?: any
+    },
+    requestID?: string
+  }
+
 }
 ```
 

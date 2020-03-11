@@ -66,6 +66,7 @@ class App extends Component {
     // 配置使用页面，第1个为显示第1页
     pages: [
       'pages/test/index',
+      'pages/admin-student/index',
       'pages/cropper/index',
     ],
     window: {

@@ -1,12 +1,30 @@
 
 @import '../../assets/style/theme.scss';
+/* Flex Item */
+@mixin flex-n($col: 1, $offset:0) {
+  width: 100%;
+  display: block;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  $width: ($col / 12) * 100%;
+  @include flex(0, 0, $width);
+  max-width: $width;
+
+  @if $offset > 0 {
+    margin-left: ($offset / 12) * 100%;
+  }
+}
 
 .admin-create-student{
 
-  &__item{
-    border-bottom: 1PX $color-border-light solid;
+  background-color: $color-bg;
 
-    &:first-of-type{
+  padding: 0 $spacing-h-xl $spacing-h-xl $spacing-h-xl;
+
+  &__item{
+
+    &:first-child{
       padding: $spacing-v-xl $spacing-v-xl $spacing-v-xl 0;
       position: relative;
 
@@ -17,12 +35,23 @@
       }
     }
 
-    &:last-of-type{
-      border-bottom: 0;
+    // 匹配前4个子对象
+    &:nth-child(-n+4){
+      border-bottom: 1PX $color-border-light solid;
     }
 
+    &:last-child{
+      @include display-flex();
+      width: 100%;
+      @include justify-content(space-around);
 
+      & > View{
+        @include flex-n(5);
+      }
+    }
   }
+
+
 
   .at-input{
     margin-left: 0;

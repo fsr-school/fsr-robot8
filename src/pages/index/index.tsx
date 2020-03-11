@@ -3,6 +3,8 @@ import { connect } from '@tarojs/redux'
 
 import { View, Image, Swiper, SwiperItem } from '@tarojs/components'
 import { AtGrid } from "taro-ui"
+
+import { openWebView } from '@/utils/index'
 import './index.scss'
 
 // #region 书写注意
@@ -48,35 +50,15 @@ interface Index {
 }))
 class Index extends Component<IProps, PageState> {
 
-  onShareAppMessage(res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '恒星 - 绑定学生档案',
-      path: '/pages/my/index?id=123'
-    }
-  }
   // 组件将要挂载
   componentWillMount() {
     // 登录和获取用户信息，有更新就保存到数据库，仅执行一次
     this.props.eLogin()
     this.props.eGetUserInfo()
   }
-  // 组件已显示
-  componentDidMount() {
-    Taro.getClipboardData({
-      success: function (res) {
-        console.log(res.data)
-      }
-    })
-    // TAG 这里临时用于自动跳转 TabBar 页面
-    // Taro.switchTab({ url: '../../pages/my/index' })
-  }
 
   gotoPage() {
-    Taro.navigateTo({ url: '../webview/index' })
+    openWebView({ url: 'http://mp.weixin.qq.com/s?__biz=MzU1Njc4MjY3NQ==&mid=100000005&idx=1&sn=6ef25323a8037c3f87ada2f0b7389d99&chksm=7c3e84394b490d2fb57179f0f274cdb7cca0cd68c9d4e9ca8f48c9a9200102d632395d5c5dad&scene=18#wechat_redirect' })
   }
 
   config: Config = {

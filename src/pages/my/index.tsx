@@ -84,12 +84,6 @@ class Index extends Component<IProps, PageState> {
     userInfo && this.props.eSetUserInfo(userInfo)
   }
 
-  handleClick(value) {
-    this.setState({
-      openChildren: value
-    })
-  }
-
   render() {
     const { scopeUserInfo, avatarUrl, nickName, auth } = this.props.my
     return (

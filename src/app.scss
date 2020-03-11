@@ -20,14 +20,20 @@ view {
   color:red;
 }
 
-
-.at-form{
-  padding: 0 $spacing-h-xl $spacing-h-xl $spacing-h-xl;
+.at-toast{
+  // z-index: 9999;
+  .toast-body{
+    top: 35%;
+  }
 }
 
-.at-button{
+button, .at-button{
   background-color: $at-button-bg;
   color: $color-text-base-inverse;
+
+  &.share-bt{
+    background-color: $color-text-secondary;
+  }
 }
 
 .fsr-list-item{
